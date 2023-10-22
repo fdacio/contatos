@@ -10,6 +10,7 @@ const CreateGrupo = ({ navigation }) => {
         </SafeAreaView>
     );
 }
+
 const styles = StyleSheet.create({
 
     container: {

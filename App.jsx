@@ -51,7 +51,7 @@ const CustomDrawer = (props) => {
                     }
                     style={{ borderTopWidth: 1 }}
                     labelStyle={styles.drawerItemStyle}
-                    icon={() => <Icon name="sign-out" size={20} color="#009" width={20}/>}
+                    icon={() => <Icon name="sign-out" size={20} color="#009" width={20} />}
                 />
             </DrawerContentScrollView>
             <Text
