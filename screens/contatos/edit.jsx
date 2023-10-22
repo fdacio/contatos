@@ -7,7 +7,7 @@ import TextInputMaskLabel from '../../components/TextInputMaskLabel';
 import Header from '../../components/Header';
 import Loading from '../../components/Loading';
 
-const EditUsuario = ({ navigation, route }) => {
+const EditContato = ({ navigation, route }) => {
 
     const [id, setId] = useState();
     const [nome, setNome] = useState('');
@@ -32,10 +32,10 @@ const EditUsuario = ({ navigation, route }) => {
     };
 
     useEffect(() => {
-        onLoadUsuario(route.params.id);
+        onLoadContato(route.params.id);
     }, []);
 
-    const onLoadUsuario = async (id) => {
+    const onLoadContato = async (id) => {
         if (id === undefined) return;
         console.log("Carregando Edit ...");
         setLoading(true);
@@ -67,7 +67,7 @@ const EditUsuario = ({ navigation, route }) => {
         setLabelButton("Aguarde...");
         setLoading(true);
 
-        const url = 'https://automacao.daciosoftware.com.br/api/usuarios/' + id + '/update';
+        const url = 'https://automacao.daciosoftware.com.br/api/Contatos/' + id + '/update';
         let data = {
             'nome': nome,
             'email': email,
@@ -77,7 +77,7 @@ const EditUsuario = ({ navigation, route }) => {
         await axios.put(url, data)
             .then((response) => {
                 if (response.status == 204) {
-                    navigation.navigate('ListUsuario', { message: "Registro alterado com sucesso" });
+                    navigation.navigate('ListContato', { message: "Registro alterado com sucesso" });
                 }
             })
             .catch((error) => {
@@ -115,7 +115,7 @@ const EditUsuario = ({ navigation, route }) => {
 
         <SafeAreaView style={styles.container}>
 
-            <Header title="Editar Usuário" navigation={navigation} />
+            <Header title="Editar Contato" navigation={navigation} />
 
             <ScrollView style={{ padding: 16 }}>
 
@@ -163,4 +163,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default EditUsuario;
+export default EditContato;

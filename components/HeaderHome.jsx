@@ -12,7 +12,7 @@ const HeaderHome = (props) => {
                     icon={
                         <Icon
                             name="bars"
-                            size={24}
+                            size={20}
                             color="white" />
                     }
                     type="clear"

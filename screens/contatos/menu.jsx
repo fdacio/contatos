@@ -2,21 +2,21 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { StyleSheet } from 'react-native';
 
-import ListUsuario from './index';
-import DeleteUsuario from './delete';
-import EditUsuario from './edit';
-import CreateUsuario from './create';
+import ListContatos from './index';
+import DeleteContato from './delete';
+import EditContato from './edit';
+import CreateContato from './create';
 
 const Stack = createStackNavigator();
 
-const MenuUsuario = ({ navigation }) => {
+const MenuContatos = () => {
 
     return (
-        <Stack.Navigator initialRouteName="ListUsuario" >
-            <Stack.Screen name="ListUsuario" component={ListUsuario} options={{title: 'Usuários', headerShown: false }} />
-            <Stack.Screen name="DeleteUsuario" component={DeleteUsuario} options={{ title: 'Deletar Usuário', headerShown: false }} />
-            <Stack.Screen name="CreateUsuario" component={CreateUsuario} options={{ title: 'Cadastrar Usuário', headerShown: false  }} />
-            <Stack.Screen name="EditUsuario" component={EditUsuario} options={{ title: 'Editar Usuário', headerShown: false }} />
+        <Stack.Navigator initialRouteName="ListContatos" >
+            <Stack.Screen name="ListContato" component={ListContatos} options={{title: 'Contatos', headerShown: false }} />
+            <Stack.Screen name="DeleteContato" component={DeleteContato} options={{ title: 'Deletar Contato', headerShown: false }} />
+            <Stack.Screen name="CreateContato" component={CreateContato} options={{ title: 'Cadastrar Contato', headerShown: false  }} />
+            <Stack.Screen name="EditContato" component={EditContato} options={{ title: 'Editar Contato', headerShown: false }} />
         </Stack.Navigator>
     )
 }
@@ -32,4 +32,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default MenuUsuario;
+export default MenuContatos;

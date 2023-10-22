@@ -5,9 +5,9 @@ import Header from '../../components/Header';
 import Button from '../../components/Button';
 import Loading from '../../components/Loading';
 
-const DeleteUsuario = ({ navigation, route }) => {
+const DeleteContato= ({ navigation, route }) => {
 
-    const [usuario, setUsuario] = useState([]);
+    const [contato, setContato] = useState([]);
     const [messageError, setMessageError] = useState('');
     const [disabledButton, setDisabledButton] = useState(false);
     const labelBotao = "Deletar";
@@ -19,19 +19,19 @@ const DeleteUsuario = ({ navigation, route }) => {
     };
 
     useEffect(() => {
-        onLoadUsuario(route.params.id);
+        onLoadContatos(route.params.id);
     }, []);
 
-    const onLoadUsuario = async (id) => {
+    const onLoadContatos = async (id) => {
         if (id === undefined) return;
         console.log("Carregando Delete ...");
         setLoading(true);
 
-        const url = 'https://automacao.daciosoftware.com.br/api/usuarios/' + id + '/find';
+        const url = 'https://automacao.daciosoftware.com.br/api/Contatoss/' + id + '/find';
         await axios.get(url)
             .then((response) => {
                 if (response.status == 200) {
-                    setUsuario(response.data);
+                    setContato(response.data);
                 }
             })
             .catch(function (error) {
@@ -51,12 +51,12 @@ const DeleteUsuario = ({ navigation, route }) => {
         setLabelButton("Aguarde...");
         setLoading(true);
 
-        const url = 'https://automacao.daciosoftware.com.br/api/usuarios/' + usuario.id + '/destroy';
+        const url = 'https://automacao.daciosoftware.com.br/api/usuarios/' + contato.id + '/destroy';
 
         await axios.delete(url)
             .then((response) => {
                 if (response.status == 204) {
-                    navigation.navigate('ListUsuario', { message: 'Registro excluído com sucesso.' });
+                    navigation.navigate('ListContatos', { message: 'Registro excluído com sucesso.' });
                 }
             })
             .catch((error) => {
@@ -79,14 +79,14 @@ const DeleteUsuario = ({ navigation, route }) => {
 
         <SafeAreaView style={styles.container}>
 
-            <Header title="Deletar Usuário" navigation={navigation} />
+            <Header title="Deletar Contato" navigation={navigation} />
 
             <View style={{ padding: 16 }} >
 
                 <View style={styles.contentDados}>
-                    <Text style={styles.itemName}>{usuario.nome}</Text>
-                    <Text style={styles.itemEmail}>{usuario.email}</Text>
-                    <Text style={styles.itemTelefone}>{usuario.telefone}</Text>
+                    <Text style={styles.itemName}>{Contatos.nome}</Text>
+                    <Text style={styles.itemEmail}>{Contatos.email}</Text>
+                    <Text style={styles.itemTelefone}>{Contatos.telefone}</Text>
                 </View>
 
                 <View style={styles.bottomPosition}>
@@ -158,4 +158,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default DeleteUsuario;
+export default DeleteContato;

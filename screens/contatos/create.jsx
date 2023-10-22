@@ -7,7 +7,7 @@ import TextInputMaskLabel from '../../components/TextInputMaskLabel';
 import Header from '../../components/Header';
 import Loading from '../../components/Loading';
 
-const CreateUsuario = ({ navigation }) => {
+const CreateContato = ({ navigation }) => {
 
     const [nome, setNome] = useState('');
     const [alertNome, setAlertNome] = useState('');
@@ -47,7 +47,7 @@ const CreateUsuario = ({ navigation }) => {
         await axios.post(url, data)
             .then(function (response) {
                 if (response.status == 201) {
-                    navigation.navigate('ListUsuario', { message: "Registro realizado com sucesso"});
+                    navigation.navigate('ListContatos', { message: "Registro realizado com sucesso"});
                 }
             })
             .catch(function (error) {
@@ -84,7 +84,7 @@ const CreateUsuario = ({ navigation }) => {
 
         <SafeAreaView style={styles.container}>
 
-            <Header title="Cadastrar Usuário" navigation={navigation} />
+            <Header title="Cadastrar Contato" navigation={navigation} />
 
             <ScrollView style={{ padding: 16 }} >
 
@@ -132,4 +132,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default CreateUsuario;
+export default CreateContato;

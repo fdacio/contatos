@@ -7,9 +7,9 @@ import Header from '../../components/Header';
 import Loading from '../../components/Loading';
 import Message from '../../components/Message';
 
-const ListUsuario = ({ navigation, route }) => {
+const ListContatos = ({ navigation, route }) => {
 
-    const [usuarios, setUsuarios] = useState([]);
+    const [contatos, setContatos] = useState([]);
     const [isFreshing, setIsFreshing] = useState(false);
     const [message, setMessage] = useState();
 
@@ -20,7 +20,7 @@ const ListUsuario = ({ navigation, route }) => {
         await axios.get(url)
             .then((response) => {
                 if (response.status == 200) {
-                    setUsuarios((response.data));
+                    setContatos((response.data));
                 }
 
             }).catch((error) => {
@@ -41,13 +41,13 @@ const ListUsuario = ({ navigation, route }) => {
     return (
 
         <SafeAreaView style={styles.container}>
-            <Header title="Usuários" navigation={navigation}
+            <Header title="Contatos" navigation={navigation}
                 buttonAction={
-                    <Button onPress={() => navigation.navigate('CreateUsuario')}
+                    <Button onPress={() => navigation.navigate('CreateContato')}
                         icon={
                             <Icon
                                 name="plus"
-                                size={32}
+                                size={20}
                                 color="#fff" />
                         }
                         type="clear"
@@ -57,7 +57,7 @@ const ListUsuario = ({ navigation, route }) => {
             <Message message={message} visible={(message !== undefined)} navigation={navigation}></Message>
 
             <FlatList style={{ padding: 16 }}
-                data={usuarios}
+                data={contatos}
                 refreshing={isFreshing}
                 onEndReached={onLoadList}
                 onEndReachedThreshold={0.5}
@@ -70,7 +70,7 @@ const ListUsuario = ({ navigation, route }) => {
                             <Text style={styles.itemTelefone}>{item.telefone}</Text>
                         </View>
                         <View style={styles.groupButton} >
-                            <Button onPress={() => navigation.navigate('DeleteUsuario', { id: item.id })}
+                            <Button onPress={() => navigation.navigate('DeleteContato', { id: item.id })}
                                 icon={
                                     <Icon
                                         name="trash"
@@ -79,7 +79,7 @@ const ListUsuario = ({ navigation, route }) => {
                                 }
                                 type="clear"
                             />
-                            <Button onPress={() => navigation.navigate('EditUsuario', { id: item.id })}
+                            <Button onPress={() => navigation.navigate('EditContato', { id: item.id })}
                                 icon={
                                     <Icon
                                         name="edit"
@@ -139,4 +139,4 @@ const styles = StyleSheet.create({
 
 });
 
-export default ListUsuario;
+export default ListContatos;
