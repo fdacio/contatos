@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { StatusBar, StyleSheet, Text, ImageBackground, BackHandler } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList, DrawerItem } from '@react-navigation/drawer';
+
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Home from './screens/Home';
 import MenuContatos from './screens/contatos/menu';
@@ -68,6 +69,13 @@ const CustomDrawer = (props) => {
 
 
 const App = () => {
+
+    useEffect(() => {
+        BackHandler.addEventListener("hardwareBackPress",()=>{
+            BackHandler.exitApp();
+          });
+    }, []);
+
     return (
         <NavigationContainer >
             <StatusBar backgroundColor='#009' />
