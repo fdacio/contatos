@@ -1,6 +1,5 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import { StyleSheet } from 'react-native';
 
 import ListContatos from './index';
 import DeleteContato from './delete';
@@ -20,16 +19,5 @@ const MenuContatos = () => {
         </Stack.Navigator>
     )
 }
-const styles = StyleSheet.create({
-
-    btnAdd: {
-        marginRight: 32
-    },
-    textBtnAdd: {
-        color: '#000',
-        fontSize: 36,
-        fontWeight: 'bold'
-    }
-});
 
 export default MenuContatos;

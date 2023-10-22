@@ -1,6 +1,5 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import { StyleSheet } from 'react-native';
 
 import ListGrupos from './index';
 import DeleteGrupo from './delete';
@@ -9,7 +8,7 @@ import CreateGrupo from './create';
 
 const Stack = createStackNavigator();
 
-const MenuGrupos = ({ navigation }) => {
+const MenuGrupos = () => {
 
     return (
         <Stack.Navigator initialRouteName="ListGrupo" >
@@ -20,16 +19,5 @@ const MenuGrupos = ({ navigation }) => {
         </Stack.Navigator>
     )
 }
-const styles = StyleSheet.create({
-
-    btnAdd: {
-        marginRight: 32
-    },
-    textBtnAdd: {
-        color: '#000',
-        fontSize: 36,
-        fontWeight: 'bold'
-    }
-});
 
 export default MenuGrupos;

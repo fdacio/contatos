@@ -1,13 +1,21 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { StyleSheet, SafeAreaView } from 'react-native';
+import Header from '../../components/Header';
 
-const CreateGrupo = () => {
+const CreateGrupo = ({ navigation }) => {
 
     return (
-        <View>
-            <Text>Cadastrar de Grupos de Contatos</Text>
-        </View>
+        <SafeAreaView style={styles.container}>
+            <Header title="Cadastrar Grupo" navigation={navigation} />
+        </SafeAreaView>
     );
 }
+const styles = StyleSheet.create({
+
+    container: {
+        flex: 1,
+        backgroundColor: '#fff',
+    }
+});
 
 export default CreateGrupo;

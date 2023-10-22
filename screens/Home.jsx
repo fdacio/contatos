@@ -11,7 +11,7 @@ const Home = ({ navigation }) => {
             <HeaderHome title="Meus Contatos" navigation={navigation} />
             <View style={styles.contentImageHome}>
                 <TouchableOpacity style={styles.imageHome}
-                    onPress={() => navigation.navigate('MenuUsuario')} >
+                    onPress={() => navigation.navigate('MenuContatos')} >
                     <Icon
                         name="users"
                         size={200}
