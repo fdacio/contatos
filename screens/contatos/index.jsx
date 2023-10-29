@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { FlatList, StyleSheet, SafeAreaView, View, Text, Alert } from 'react-native';
+import { FlatList, StyleSheet, SafeAreaView, View, Text, Alert, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Button } from 'react-native-elements';
 import axios from 'axios';
 import Header from '../../components/Header';
 import Loading from '../../components/Loading';
 import Message from '../../components/Message';
+
 
 const ListContatos = ({ navigation, route }) => {
 
@@ -16,7 +17,7 @@ const ListContatos = ({ navigation, route }) => {
     const onLoadList = async () => {
         console.log("Carregando Lista...");
         setIsFreshing(true);
-        const url = 'https://automacao.daciosoftware.com.br/api/usuarios';
+        const url = 'https://contatos.daciosoftware.com.br/api/contatos';
         await axios.get(url)
             .then((response) => {
                 if (response.status == 200) {
@@ -68,26 +69,23 @@ const ListContatos = ({ navigation, route }) => {
                             <Text style={styles.itemName}>{item.nome}</Text>
                             <Text style={styles.itemEmail}>{item.email}</Text>
                             <Text style={styles.itemTelefone}>{item.telefone}</Text>
+                            <Text style={styles.itemTelefone}>{item.grupo.nome}</Text>
                         </View>
                         <View style={styles.groupButton} >
-                            <Button onPress={() => navigation.navigate('DeleteContato', { id: item.id })}
-                                icon={
-                                    <Icon
-                                        name="trash"
-                                        size={32}
-                                        color="#ccc" />
-                                }
-                                type="clear"
-                            />
-                            <Button onPress={() => navigation.navigate('EditContato', { id: item.id })}
-                                icon={
-                                    <Icon
-                                        name="edit"
-                                        size={32}
-                                        color="#ccc" />
-                                }
-                                type="clear"
-                            />
+                            <TouchableOpacity onPress={() => navigation.navigate('DeleteContato', { id: item.id })} style={styles.actionButton}>
+                                <Icon
+                                    name="trash"
+                                    size={20}
+                                    color="#ccc"
+                                />
+                            </TouchableOpacity>
+                            <TouchableOpacity onPress={() => navigation.navigate('EditContato', { id: item.id })} style={styles.actionButton}>
+                                <Icon
+                                    name="edit"
+                                    size={20}
+                                    color="#ccc"
+                                />
+                            </TouchableOpacity>
                         </View>
 
                     </View>
@@ -136,6 +134,10 @@ const styles = StyleSheet.create({
     groupButton: {
         flexDirection: 'row',
     },
+
+    actionButton: {
+        marginLeft: 10
+    }
 
 });
 

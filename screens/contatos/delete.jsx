@@ -27,7 +27,7 @@ const DeleteContato= ({ navigation, route }) => {
         console.log("Carregando Delete ...");
         setLoading(true);
 
-        const url = 'https://automacao.daciosoftware.com.br/api/Contatoss/' + id + '/find';
+        const url = 'https://contatos.daciosoftware.com.br/api/contatos/' + id;
         await axios.get(url)
             .then((response) => {
                 if (response.status == 200) {
@@ -51,7 +51,7 @@ const DeleteContato= ({ navigation, route }) => {
         setLabelButton("Aguarde...");
         setLoading(true);
 
-        const url = 'https://automacao.daciosoftware.com.br/api/usuarios/' + contato.id + '/destroy';
+        const url = 'https://contatos.daciosoftware.com.br/api/contatos/' + contato.id;
 
         await axios.delete(url)
             .then((response) => {
@@ -84,9 +84,9 @@ const DeleteContato= ({ navigation, route }) => {
             <View style={{ padding: 16 }} >
 
                 <View style={styles.contentDados}>
-                    <Text style={styles.itemName}>{Contatos.nome}</Text>
-                    <Text style={styles.itemEmail}>{Contatos.email}</Text>
-                    <Text style={styles.itemTelefone}>{Contatos.telefone}</Text>
+                    <Text style={styles.itemName}>{contato.nome}</Text>
+                    <Text style={styles.itemEmail}>{contato.email}</Text>
+                    <Text style={styles.itemTelefone}>{contato.telefone}</Text>
                 </View>
 
                 <View style={styles.bottomPosition}>

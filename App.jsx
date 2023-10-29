@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { StatusBar, StyleSheet, Text, ImageBackground, BackHandler } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList, DrawerItem } from '@react-navigation/drawer';
@@ -12,7 +12,6 @@ import Banner from './assets/users.png';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 const Drawer = createDrawerNavigator();
-
 
 const DrawerMenu = () => {
 
@@ -69,12 +68,6 @@ const CustomDrawer = (props) => {
 
 
 const App = () => {
-
-    useEffect(() => {
-        BackHandler.addEventListener("hardwareBackPress",()=>{
-            BackHandler.exitApp();
-          });
-    }, []);
 
     return (
         <NavigationContainer >

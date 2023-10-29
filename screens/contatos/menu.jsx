@@ -12,7 +12,7 @@ const MenuContatos = () => {
 
     return (
         <Stack.Navigator initialRouteName="ListContatos" >
-            <Stack.Screen name="ListContato" component={ListContatos} options={{title: 'Contatos', headerShown: false }} />
+            <Stack.Screen name="ListContatos" component={ListContatos} options={{title: 'Contatos', headerShown: false }} />
             <Stack.Screen name="DeleteContato" component={DeleteContato} options={{ title: 'Deletar Contato', headerShown: false }} />
             <Stack.Screen name="CreateContato" component={CreateContato} options={{ title: 'Cadastrar Contato', headerShown: false  }} />
             <Stack.Screen name="EditContato" component={EditContato} options={{ title: 'Editar Contato', headerShown: false }} />
