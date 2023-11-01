@@ -148,12 +148,6 @@ const styles = StyleSheet.create({
         marginTop: 16,
     },
 
-    messageSuccess: {
-        fontSize: 14,
-        color: 'green',
-        alignContent: 'center'
-    },
-
     messageError: {
         fontSize: 14,
         color: 'red',

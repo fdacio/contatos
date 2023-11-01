@@ -119,11 +119,12 @@ const EditContato = ({ navigation, route }) => {
                         setAlertEmail(error.response.data.email);
                     }
 
-                    if (error.response.data.email != undefined) {
+                    if (error.response.data.telefone != undefined) {
                         setAlertTelefone(error.response.data.telefone);
                     }
-                    setMessageError('Error ao alterar registro: ' + error.response.data.id_grupo);
-
+                    if (error.response.data.id_grupo != undefined) {
+                        setAlertGrupo(error.response.data.id_grupo);
+                    }
                 } else {
                     setMessageError('Error ao alterar registro: ' + error.message);
                 }
@@ -151,6 +152,7 @@ const EditContato = ({ navigation, route }) => {
                 <TextInputMaskLabel label="Telefone" mask={maskTelefone} keyboardType="phone-pad" onChangeText={setTelefone} alert={alertTelefone} value={telefone} />
 
                 <SelectInputLabel label="Grupo" title="Grupos" text={grupo.nome} value={grupo.id} dados={grupos} alert={alertGrupo} onSelectedItem={setGrupo}></SelectInputLabel>
+                
                 <View style={styles.bottomPosition}>
                     <Button label={labelButton} onPress={onUpdate} disabled={disabledButton} />
                 </View>
@@ -174,12 +176,6 @@ const styles = StyleSheet.create({
 
     bottomPosition: {
         marginTop: 16,
-    },
-
-    messageSuccess: {
-        fontSize: 14,
-        color: 'green',
-        alignContent: 'center'
     },
 
     messageError: {

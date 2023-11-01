@@ -113,8 +113,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         backgroundColor: '#0751d3',
-        height: 40,
-
+        height: 40
     },
 
     modalHeaderClose: {
