@@ -126,7 +126,7 @@ const EditContato = ({ navigation, route }) => {
                         setAlertGrupo(error.response.data.id_grupo);
                     }
                 } else {
-                    setMessageError('Error ao alterar registro: ' + error.message);
+                    setMessageError('Error ao criar registro: ' + error.response.data.error);
                 }
             })
             .finally(function () {

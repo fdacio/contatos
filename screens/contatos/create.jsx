@@ -96,7 +96,7 @@ const CreateContato = ({ navigation }) => {
                         setAlertGrupo(error.response.data.id_grupo);
                     }
                 } else {
-                    setMessageError('Error ao criar registro: ' + error.message);
+                    setMessageError('Error ao criar registro: ' + error.response.data.error);
                 }
             })
             .finally(function () {

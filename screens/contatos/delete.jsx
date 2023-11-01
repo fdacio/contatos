@@ -64,7 +64,7 @@ const DeleteContato= ({ navigation, route }) => {
                     Alert.alert('Error: Ver conexão com a Internet');
                     dispatch({ type: RELOAD });
                 } else {
-                    setMessageError('Error ao excluir o registro: ' + error.message);
+                    setMessageError('Error ao excluir o registro: ' + error.response.data.error);
                 }
             })
             .finally(function () {

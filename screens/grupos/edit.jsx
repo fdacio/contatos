@@ -79,7 +79,7 @@ const EditGrupo = ({ navigation, route }) => {
                     }
 
                 } else {
-                    setMessageError('Error ao alterar registro: ' + error.message);
+                    setMessageError('Error ao criar registro: ' + error.response.data.error);
                 }
             })
             .finally(function () {

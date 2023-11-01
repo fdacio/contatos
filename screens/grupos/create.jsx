@@ -50,7 +50,7 @@ const CreateGrupo = ({ navigation }) => {
                         setAlertNome(error.response.data.nome);
                     }
                 } else {
-                    setMessageError('Error ao criar registro: ' + error.message);
+                    setMessageError('Error ao criar registro: ' + error.response.data.error);
                 }
             })
             .finally(function () {
