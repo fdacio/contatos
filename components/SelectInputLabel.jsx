@@ -28,29 +28,16 @@ const SelectInputLabel = (props) => {
             <Modal visible={visible} style={styles.modal} animationType="slide" transparent={true}>
                 <View style={styles.modalContent}>
                     <View style={styles.modalHeader}>
-                        <View style={styles.modalHeaderClose}>
-                            <Button
-                                onPress={() => setVisible(false)}
-                                icon={
-                                    <Icon
-                                        name="arrow-left"
-                                        size={15}
-                                        color="white" />
-                                }
-                                type='clear'
-                            />
-                        </View>
                         <View style={styles.modalHeaderContentTitle}>
                             <Text style={styles.modalHeaderTitle}>{props.title}</Text>
                         </View>
-                        <View style={{ 'flex': 1 }}></View>
                     </View>
                     <SafeAreaView style={styles.contentList}>
                         <FlatList
                             data={props.dados}
                             keyExtractor={(item) => item.id}
                             renderItem={({ item }) =>
-                                <TouchableOpacity style={[styles.contentItem, (props.value == item.id ? {'backgroundColor' : '#ccc'} : '')]} onPress={() => onSelectedItem({item})}>
+                                <TouchableOpacity style={[styles.contentItem, (props.value == item.id ? {'backgroundColor' : '#a5b8f2'} : '')]} onPress={() => onSelectedItem({item})}>
                                     <Text style={styles.textItem}>{item.nome}</Text>
                                 </TouchableOpacity>
                             }
@@ -58,6 +45,10 @@ const SelectInputLabel = (props) => {
 
                         </FlatList>
                     </SafeAreaView>
+
+                    <TouchableOpacity style={styles.btnCancelar} onPress={()=>setVisible(false)}>
+                        <Text style={styles.btnCancelarText}>Cancelar</Text>
+                    </TouchableOpacity>
 
                 </View>
 
@@ -84,7 +75,8 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         width: '100%',
         height: 40,
-        padding: 8,
+        paddingVertical: 4,
+        paddingHorizontal: 8,
         fontSize: 18,
         borderRadius: 4,
         flexDirection: 'row',
@@ -102,11 +94,11 @@ const styles = StyleSheet.create({
 
     modalContent: {
         flex: 1,
-        marginVertical: 60,
-        marginHorizontal: 20,
+        marginVertical: 200,
+        marginHorizontal: 16,
         backgroundColor: "#fff",
-        borderWidth: 1,
-        borderColor: "#ccc"
+        borderWidth: 2,
+        borderColor: "#b8b8b8"
     },
 
     modalHeader: {
@@ -151,6 +143,22 @@ const styles = StyleSheet.create({
 
     textItem: {
         fontSize: 18
+    },
+
+    btnCancelar: {
+        borderTopColor: '#b8b8b8',
+        borderTopWidth: 1,
+        alignItems: 'center',
+        padding: 8,
+        backgroundColor: '#ccc',
+        position: 'absolute',
+        bottom:0,
+        left:0,
+        width: '100%'
+    },
+
+    btnCancelarText:{
+        fontSize: 18,
     }
 
 })

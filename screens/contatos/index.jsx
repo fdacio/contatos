@@ -75,14 +75,14 @@ const ListContatos = ({ navigation, route }) => {
                             <TouchableOpacity onPress={() => navigation.navigate('DeleteContato', { id: item.id })} style={styles.actionButton}>
                                 <Icon
                                     name="trash"
-                                    size={20}
+                                    size={32}
                                     color="#ccc"
                                 />
                             </TouchableOpacity>
                             <TouchableOpacity onPress={() => navigation.navigate('EditContato', { id: item.id })} style={styles.actionButton}>
                                 <Icon
                                     name="edit"
-                                    size={20}
+                                    size={32}
                                     color="#ccc"
                                 />
                             </TouchableOpacity>

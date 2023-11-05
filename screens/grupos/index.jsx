@@ -69,14 +69,14 @@ const ListGrupos = ({ navigation, route }) => {
                             <TouchableOpacity onPress={() => navigation.navigate('DeleteGrupo', { id: item.id })} style={styles.actionButton}>
                                 <Icon
                                     name="trash"
-                                    size={20}
+                                    size={32}
                                     color="#ccc"
                                 />
                             </TouchableOpacity>
                             <TouchableOpacity onPress={() => navigation.navigate('EditGrupo', { id: item.id })} style={styles.actionButton}>
                                 <Icon
                                     name="edit"
-                                    size={20}
+                                    size={32}
                                     color="#ccc"
                                 />
                             </TouchableOpacity>
@@ -101,7 +101,7 @@ const styles = StyleSheet.create({
 
     itemName: {
         fontSize: 18,
-        height: 25,
+        height: 32,
         fontWeight: 'bold',
     },
 

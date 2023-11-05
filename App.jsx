@@ -42,7 +42,7 @@ const CustomDrawer = (props) => {
 
     return (
         <SafeAreaView style={{ flex: 1 }}>
-            <ImageBackground source={Banner} style={{ height: 120 }} />
+            <ImageBackground source={Banner} style={styles.imageBanner} />
             <DrawerContentScrollView {...props}>
                 <DrawerItemList {...props} />
                 <DrawerItem {...props}
@@ -81,7 +81,8 @@ const styles = StyleSheet.create({
 
     imageBanner: {
         width: 'auto',
-        height: 200,
+        height: 120,
+        marginTop:4
     },
 
     drawerScreenItemStyle: {
