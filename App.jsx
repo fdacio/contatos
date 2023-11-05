@@ -25,15 +25,15 @@ const DrawerMenu = () => {
                 },
                 drawerLabelStyle: {
                     fontSize: 20,
-                    color: "#009"
+                    color: "#000"
                 },
             }}
 
             drawerContent={(props) => <CustomDrawer {...props} />}>
 
-            <Drawer.Screen name="Home" component={Home} options={{ title: 'Home', headerShown: false, drawerIcon: (() => <Icon name="home" size={20} color="#009" width={20} />) }} />
-            <Drawer.Screen name="MenuContatos" component={MenuContatos} options={{ title: 'Contatos', headerShown: false, drawerIcon: (() => <Icon name="users" size={20} color="#009" width={20} />) }} />
-            <Drawer.Screen name="MenuGrupos" component={MenuGrupos} options={{ title: 'Grupos', headerShown: false, drawerIcon: (() => <Icon name="users" size={20} color="#009" width={20} />) }} />
+            <Drawer.Screen name="Home" component={Home} options={{ title: 'Home', headerShown: false, drawerIcon: (() => <Icon name="home" size={20} color="#000" width={20} />) }} />
+            <Drawer.Screen name="MenuContatos" component={MenuContatos} options={{ title: 'Contatos', headerShown: false, drawerIcon: (() => <Icon name="users" size={20} color="#000" width={20} />) }} />
+            <Drawer.Screen name="MenuGrupos" component={MenuGrupos} options={{ title: 'Grupos', headerShown: false, drawerIcon: (() => <Icon name="users" size={20} color="#000" width={20} />) }} />
 
         </Drawer.Navigator>
     );
@@ -51,7 +51,7 @@ const CustomDrawer = (props) => {
                     }
                     style={{ borderTopWidth: 1 }}
                     labelStyle={styles.drawerItemStyle}
-                    icon={() => <Icon name="sign-out" size={20} color="#009" width={20} />}
+                    icon={() => <Icon name="sign-out" size={20} color="#000" width={20} />}
                 />
             </DrawerContentScrollView>
             <Text
@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
 
     drawerScreenItemStyle: {
         fontSize: 20,
-        color: "#080"
+        color: "#000"
     },
 
     drawerItemStyle: {
