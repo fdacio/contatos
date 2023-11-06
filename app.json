@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "Contatos",
-    "slug": "Contatos",
+    "slug": "contatos",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -11,25 +11,17 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
-    "ios": {
-      "supportsTablet": true
-    },
     "android": {
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
-      },
-      "package": "br.com.daciosoftware.contatos"
+      "package": "br.com.daciosoftware.contatos",
+      "versionCode": 1
     },
-    "web": {
-      "favicon": "./assets/favicon.png"
+    "ios": {
+      "bundleIndentify": "br.com.daciosoftware.contatos",
+      "buildNumber": "1.0.0"
     },
     "extra": {
       "eas": {
-        "projectId": "07d916de-63af-4161-91fa-7ead8584806a"
+        "projectId": "5c3e3800-0a2e-46af-8385-7fb5e67b0495"
       }
     }
   }
