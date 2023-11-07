@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
 
     content: {
         flexDirection: 'row',
-        backgroundColor: '#0751d3',
+        backgroundColor: '#201f1f',
         height: 56,
         paddingHorizontal: 8
     },
@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
         color: 'white',
         alignSelf: 'center',
         textAlign: 'center',
-        flex: 2,
+        flex: 6,
         flexWrap: 'nowrap'
     },
 

@@ -1,7 +1,7 @@
 import React from 'react';
-import { StyleSheet, SafeAreaView, TouchableOpacity, View } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import { StyleSheet, SafeAreaView, TouchableOpacity, View, Image } from 'react-native';
 import HeaderHome from '../components/HeaderHome';
+import Logo from '../assets/home.png'
 
 const Home = ({ navigation }) => {
 
@@ -10,14 +10,10 @@ const Home = ({ navigation }) => {
 
             <HeaderHome title="Meus Contatos" navigation={navigation} />
             <View style={styles.contentImageHome}>
-                <TouchableOpacity style={styles.imageHome}
+                <TouchableOpacity style={styles.touchableImageHome}
                     onPress={() => navigation.navigate('MenuContatos')} >
-                    <Icon
-                        name="users"
-                        size={200}
-                        color="#ccc"
 
-                    />
+                    <Image source={Logo} style={styles.imageHome}></Image>    
                 </TouchableOpacity>
             </View>
         </SafeAreaView>
@@ -37,15 +33,18 @@ const styles = StyleSheet.create({
         flex: 1
     },
     
-    imageHome: {
+    touchableImageHome: {
         borderColor: '#ccc',
         borderWidth: 1,
         borderRadius: 500,
-        padding: 24,
-        height: 300,
-        width: 300,
+        padding: 20,
         justifyContent: 'center',
         alignItems: 'center',
+    },
+    
+    imageHome: {
+        height: 300,
+        width: 300,
     }
 
 });

@@ -1,13 +1,11 @@
-import React from 'react';
-import { StatusBar, StyleSheet, Text, ImageBackground, BackHandler } from 'react-native';
+import React, { useEffect } from 'react';
+import { StatusBar, StyleSheet, Text, ImageBackground, BackHandler, Alert } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList, DrawerItem } from '@react-navigation/drawer';
-
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Home from './screens/Home';
 import MenuContatos from './screens/contatos/menu';
 import MenuGrupos from './screens/grupos/menu';
-
 import Banner from './assets/users.png';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -39,7 +37,8 @@ const DrawerMenu = () => {
     );
 }
 const CustomDrawer = (props) => {
-
+    
+    
     return (
         <SafeAreaView style={{ flex: 1 }}>
             <ImageBackground source={Banner} style={styles.imageBanner} />
@@ -47,7 +46,10 @@ const CustomDrawer = (props) => {
                 <DrawerItemList {...props} />
                 <DrawerItem {...props}
                     label="Sair"
-                    onPress={() => { BackHandler.exitApp(); }
+                    onPress={() => { 
+                        BackHandler.exitApp(); 
+                        return true; 
+                    }
                     }
                     style={{ borderTopWidth: 1 }}
                     labelStyle={styles.drawerItemStyle}
@@ -68,10 +70,32 @@ const CustomDrawer = (props) => {
 
 
 const App = () => {
-
+    
+    useEffect(() => {
+        const backAction = () => {
+            Alert.alert("Contatos", "Deseja sair da aplicação?", [
+                {
+                    text: "Cancel",
+                    onPress: () => null,
+                    style: "cancel"
+                },
+                { text: "YES", onPress: () => BackHandler.exitApp() }
+            ]);
+            return true;
+        };
+    
+        const backHandler = BackHandler.addEventListener(
+            "hardwareBackPress",
+            backAction
+        );
+    
+        return () => backHandler.remove();
+    
+    }, []);
+    
     return (
         <NavigationContainer >
-            <StatusBar backgroundColor='#009' />
+            <StatusBar backgroundColor='#a37522' />
             <DrawerMenu />
         </NavigationContainer>
     )
@@ -82,7 +106,7 @@ const styles = StyleSheet.create({
     imageBanner: {
         width: 'auto',
         height: 120,
-        marginTop:4
+        marginTop: 4
     },
 
     drawerScreenItemStyle: {
