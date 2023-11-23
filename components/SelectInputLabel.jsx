@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, Text, Modal, TouchableOpacity, SafeAreaView, FlatList } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { Button } from 'react-native-elements';
 
 const SelectInputLabel = (props) => {
 
