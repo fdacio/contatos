@@ -111,9 +111,9 @@ const styles = StyleSheet.create({
     },
     
     contentDados: {
-        padding: 4,
+        padding: 8,
         borderWidth: 1,
-        borderRadius: 8,
+        borderRadius: 4,
     },
 
     itemName: {
@@ -142,7 +142,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'red',
         alignItems: 'center',
         justifyContent: 'center',
-        borderRadius: 8
+        borderRadius: 4
     },
 
     messageError: {

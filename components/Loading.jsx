@@ -3,20 +3,18 @@ import { StyleSheet, View, ActivityIndicator } from 'react-native';
 
 const Loading = (props) => {
     return (
-        <View style={styles.container}>
-            {props.loading && <ActivityIndicator color={"blue"} size={80} />}
+        <View style={[styles.container, styles.horizontal]}>
+            {props.loading && <ActivityIndicator color="#a37522" size={80} />}
         </View>
     );
 }
 
 const styles = StyleSheet.create({
-
     container: {
-        position: 'absolute',
-        alignSelf: 'center',
-        top: '50%'
-    },
-
-})
+      position: 'absolute',
+      top: '50%',
+      alignSelf: 'center'
+    }
+  });
 
 export default Loading;

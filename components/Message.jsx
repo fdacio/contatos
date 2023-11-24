@@ -14,6 +14,10 @@ const Message = (props) => {
             setMessage(props.message);
         }
         props.navigation.setParams({'message' : null});
+        const toRef = setTimeout(() => {
+            setVisible(false);
+            clearTimeout(toRef);
+          }, 5000);
     }, [props.message]);
 
     const onClose = () => {
@@ -49,10 +53,10 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         backgroundColor: '#d4edda',
         height: 52,
-        padding: 4,
-        borderRadius: 5,
+        padding: 8,
+        borderRadius: 4,
         borderColor: '#c3e6cb',
-        marginHorizontal: 16,
+        marginHorizontal: 8,
         marginVertical: 4
     },
 

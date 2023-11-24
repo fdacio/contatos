@@ -15,6 +15,7 @@ const SelectInputLabel = (props) => {
     return (
 
         <View style={styles.content}>
+
             <Text style={styles.textLabel}>{props.label}</Text>
             <TouchableOpacity style={styles.selectInput} onPress={() => setVisible(true)}>
                 <Text style={styles.selectText}>
@@ -24,7 +25,7 @@ const SelectInputLabel = (props) => {
             </TouchableOpacity>
             <Text style={styles.textAlert}>{props.alert}</Text>
 
-            <Modal visible={visible} style={styles.modal} animationType="slide" transparent={true}>
+            <Modal visible={visible} animationType="slide" >
                 <View style={styles.modalContent}>
                     <View style={styles.modalHeader}>
                         <View style={styles.modalHeaderContentTitle}>
@@ -91,47 +92,35 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
     },
 
+    textAlert: {
+        fontSize: 14,
+        color: 'red'
+    },
+
     modalContent: {
         flex: 1,
-        marginVertical: 200,
-        marginHorizontal: 16,
-        backgroundColor: "#fff",
-        borderWidth: 2,
-        borderColor: "#b8b8b8"
     },
 
     modalHeader: {
         flexDirection: 'row',
-        justifyContent: 'space-between',
-        backgroundColor: '#0751d3',
-        height: 40
-    },
-
-    modalHeaderClose: {
-        flex: 1,
-        alignItems: 'flex-start',
-        marginLeft: 4,
-        alignSelf: 'center',
+        backgroundColor: '#201f1f',
+        height: 56,
     },
 
     modalHeaderContentTitle: {
-        flex: 5,
+        flex: 1,
         justifyContent: 'center',
-        alignItems: 'center',
     },
 
     modalHeaderTitle: {
         fontSize: 18,
-        color: "#fff"
+        fontWeight: 'bold',
+        color: "#fff",
+        textAlign: 'center'
     },
 
     contentList: {
         padding: 4
-    },
-
-    textAlert: {
-        fontSize: 14,
-        color: 'red'
     },
 
     contentItem: {
@@ -145,19 +134,21 @@ const styles = StyleSheet.create({
     },
 
     btnCancelar: {
-        borderTopColor: '#b8b8b8',
-        borderTopWidth: 1,
-        alignItems: 'center',
-        padding: 8,
-        backgroundColor: '#ccc',
         position: 'absolute',
         bottom:0,
-        left:0,
-        width: '100%'
+        alignSelf: 'center',
+        justifyContent: 'center',
+        width: '95%',
+        marginBottom: 10,
+        height: 50,
+        backgroundColor: '#ccc',
+        borderRadius: 4,
     },
 
     btnCancelarText:{
         fontSize: 18,
+        fontWeight: 'bold',
+        textAlign: 'center'
     }
 
 })

@@ -38,7 +38,6 @@ const DrawerMenu = () => {
 }
 const CustomDrawer = (props) => {
     
-    
     return (
         <SafeAreaView style={{ flex: 1 }}>
             <ImageBackground source={Banner} style={styles.imageBanner} />
@@ -75,11 +74,11 @@ const App = () => {
         const backAction = () => {
             Alert.alert("Contatos", "Deseja sair da aplicação?", [
                 {
-                    text: "Cancel",
+                    text: "Não",
                     onPress: () => null,
                     style: "cancel"
                 },
-                { text: "YES", onPress: () => BackHandler.exitApp() }
+                { text: "Sim", onPress: () => BackHandler.exitApp() }
             ]);
             return true;
         };
