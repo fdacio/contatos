@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { StyleSheet, View, Text, Modal, TouchableOpacity, SafeAreaView, FlatList } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-const SelectInputLabel = (props) => {
+const SelectInputPlaceholder = (props) => {
 
     const [visible, setVisible] = useState(false);
     const setItem = props.onSelectedItem;
@@ -16,10 +16,12 @@ const SelectInputLabel = (props) => {
 
         <View style={styles.content}>
 
-            <Text style={[styles.textLabel, (props.label == '' && styles.textLabelInvisible)]}>{props.label}</Text>
             <TouchableOpacity style={styles.selectInput} onPress={() => setVisible(true)}>
                 <Text style={styles.selectText}>
                     {props.text}
+                </Text>
+                <Text style={styles.selectTextPlaceholder}>
+                    {props.placeholder}
                 </Text>
                 <Icon name="chevron-down" size={14} color="#000" style={styles.selectIcon} />
             </TouchableOpacity>
@@ -66,15 +68,6 @@ const styles = StyleSheet.create({
         marginBottom: 0
     },
 
-    textLabel: {
-        fontSize: 18,
-    },
-
-    textLabelInvisible: {
-        display: 'none',
-        height: 0
-    },
-
     selectInput: {
         borderColor: '#000',
         borderWidth: 1,
@@ -91,6 +84,12 @@ const styles = StyleSheet.create({
     selectText: {
         fontSize: 18,
         alignSelf: 'center',
+    },
+
+    selectTextPlaceholder: {
+        fontSize: 18,
+        alignSelf: 'center',
+        color: "#ccc",
     },
 
     selectIcon: {
@@ -158,4 +157,4 @@ const styles = StyleSheet.create({
 
 })
 
-export default SelectInputLabel;
+export default SelectInputPlaceholder;

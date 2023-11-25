@@ -22,9 +22,9 @@ const Header = (props) => {
             
             <Text style={styles.title}>{props.title}</Text>
 
-            <View style={styles.buttonAction}>
-                {props.buttonAction}
-            </View>
+            
+                {props.buttonsAction}
+            
 
         </View>
     );
@@ -51,15 +51,10 @@ const styles = StyleSheet.create({
         color: 'white',
         alignSelf: 'center',
         textAlign: 'center',
-        flex: 6,
-        flexWrap: 'nowrap'
+        flex: 4,
+        flexWrap: 'nowrap',
     },
 
-    buttonAction: {
-        flex: 1,
-        alignItems: 'flex-end',
-        alignSelf: 'center',
-    }
 })
 
 export default Header

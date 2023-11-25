@@ -6,13 +6,31 @@ import axios from 'axios';
 import Header from '../../components/Header';
 import Loading from '../../components/Loading';
 import Message from '../../components/Message';
+import TextInputPlaceholder from '../../components/TextInputPlaceholder';
+import SelectInputPlaceholder from '../../components/SelectInputPlaceholder';
+import ButtonSearch from '../../components/Button';
 
+const FormSearch = (props) => {
+    
+    const [nome, setNome] = useState('');
+    const [grupo, setGrupo] = useState({});
+
+    return (
+        <View style={(props.visibleSearch) ? styles.containerSearch : styles.containerSearchInvisible}>
+            <TextInputPlaceholder placeholder="Nome" autoCapitalize="words" onChangeText={text => setNome(text)} value={nome} />
+            <SelectInputPlaceholder placeholder="Grupo" title="Grupos" text={grupo.nome} value={grupo.id} onSelectedItem={setGrupo} />
+            <ButtonSearch label="Pesquisar" onPress={() => { }} />
+        </View>
+
+    );
+}
 
 const ListContatos = ({ navigation, route }) => {
 
     const [contatos, setContatos] = useState([]);
     const [isFreshing, setIsFreshing] = useState(false);
     const [message, setMessage] = useState();
+    const [visibleSearch, setVisibleSearch] = useState(false);
 
     const onLoadList = async () => {
         console.log("Carregando Lista...");
@@ -34,16 +52,23 @@ const ListContatos = ({ navigation, route }) => {
             });
     }
 
+    const onSearchVisible = () => {
+        setVisibleSearch(!visibleSearch);
+    }
+
     useEffect(() => {
         setMessage(route?.params?.message);
         onLoadList();
+        setVisibleSearch(false);
     }, [route]);
-
+    
+    
     return (
 
         <SafeAreaView style={styles.container}>
-            <Header title="Contatos" navigation={navigation}
-                buttonAction={
+            
+            <Header title="Contatos" navigation={navigation} buttonsAction={
+                <View style={styles.buttonAction}>
                     <Button onPress={() => navigation.navigate('CreateContato')}
                         icon={
                             <Icon
@@ -52,8 +77,21 @@ const ListContatos = ({ navigation, route }) => {
                                 color="#fff" />
                         }
                         type="clear"
-                    />}
-            />
+                    />
+                    <Button onPress={() => onSearchVisible()}
+                        icon={
+                            <Icon
+                                name="search"
+                                size={20}
+                                color="#fff" />
+                        }
+                        type="clear"
+                    />
+                </View>
+            }>
+            </Header>
+
+            <FormSearch visibleSearch={visibleSearch} />
 
             <Message message={message} visible={(message !== undefined)} navigation={navigation}></Message>
 
@@ -104,6 +142,25 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#fff',
+    },
+
+    buttonAction: {
+        flex: 1,
+        flexDirection: 'row',
+        alignItems: 'flex-end',
+        alignSelf: 'center',
+        justifyContent: 'space-between',
+    },
+
+    containerSearch: {
+        paddingHorizontal: 16,
+        paddingVertical: 16,
+        borderWidth: 1,
+        borderBottomColor: "#ccc",
+    },
+
+    containerSearchInvisible: {
+        display: 'none',
     },
 
     itemName: {

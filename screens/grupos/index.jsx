@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, SafeAreaView, FlatList, View, Text, Alert, TouchableOpacity  } from 'react-native';
+import { StyleSheet, SafeAreaView, FlatList, View, Text, Alert, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Button } from 'react-native-elements';
 import axios from 'axios';
@@ -40,16 +40,17 @@ const ListGrupos = ({ navigation, route }) => {
     return (
         <SafeAreaView style={styles.container}>
             <Header title="Grupos" navigation={navigation}
-                buttonAction={
-                    <Button onPress={() => navigation.navigate('CreateGrupo')}
-                        icon={
-                            <Icon
-                                name="plus"
-                                size={20}
-                                color="#fff" />
-                        }
-                        type="clear"
-                    />}
+                buttonsAction={
+                    <View style={styles.buttonAction}>
+                        <Button onPress={() => navigation.navigate('CreateGrupo')}
+                            icon={
+                                <Icon
+                                    name="plus"
+                                    size={20}
+                                    color="#fff" />
+                            }
+                            type="clear"
+                        /></View>}
             />
 
             <Message message={message} visible={(message !== undefined)} navigation={navigation}></Message>
@@ -97,6 +98,12 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#fff',
+    },
+    
+    buttonAction: {
+        flex: 1,
+        alignItems: 'flex-end',
+        alignSelf: 'center',
     },
 
     itemName: {
