@@ -18,7 +18,7 @@ const CreateContato = ({ navigation }) => {
     const [alertTelefone, setAlertTelefone] = useState('');
     const [grupo, setGrupo] = useState({});
     const [alertGrupo, setAlertGrupo] = useState('');
-    const [grupos, setGrupos] = useState({})
+    const [grupos, setGrupos] = useState({});
     const [messageError, setMessageError] = useState('');
     const [disabledButton, setDisabledButton] = useState(false);
     const labelBotao = "Salvar";

@@ -6,7 +6,6 @@ const TextInputPlaceholder = (props) => {
     return (
         <View style={styles.content}>
             <TextInput style={styles.textInput} onChangeText={props.onChangeText} value={props.value} placeholder={props.placeholder} placeholderTextColor="#ccc" autoCapitalize={props.autoCapitalize} inputMode={props.inputMode} autoComplete={props.autoComplete} keyboardType={props.keyboardType} autoCorrect={props.autoCorrect}/>
-            <Text style={styles.textAlert}>{props.alert}</Text>
         </View>
     );
 }
@@ -14,7 +13,7 @@ const TextInputPlaceholder = (props) => {
 const styles = StyleSheet.create({
 
     content: {
-        marginBottom: 0,
+        marginBottom: 16,
         border: 1,
         borderColor: 'red'
     },

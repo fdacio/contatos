@@ -5,6 +5,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 const SelectInputPlaceholder = (props) => {
 
     const [visible, setVisible] = useState(false);
+    const [placeholder, setPlaceholder] = useState(props.placeholder);
     const setItem = props.onSelectedItem;
 
     const onSelectedItem = ({ item }) => {
@@ -17,16 +18,15 @@ const SelectInputPlaceholder = (props) => {
         <View style={styles.content}>
 
             <TouchableOpacity style={styles.selectInput} onPress={() => setVisible(true)}>
-                <Text style={styles.selectText}>
+                <Text style={[styles.selectText, (props.value == undefined) && styles.selectTextInvisible]}>
                     {props.text}
                 </Text>
-                <Text style={styles.selectTextPlaceholder}>
-                    {props.placeholder}
+                <Text style={[styles.selectTextPlaceholder, (props.value  != undefined) && styles.selectTextPlaceholderInvisible]}>
+                    {placeholder}
                 </Text>
                 <Icon name="chevron-down" size={14} color="#000" style={styles.selectIcon} />
             </TouchableOpacity>
-            <Text style={styles.textAlert}>{props.alert}</Text>
-
+  
             <Modal visible={visible} animationType="slide" >
                 <View style={styles.modalContent}>
                     <View style={styles.modalHeader}>
@@ -44,14 +44,11 @@ const SelectInputPlaceholder = (props) => {
                                 </TouchableOpacity>
                             }
                         >
-
                         </FlatList>
                     </SafeAreaView>
-
                     <TouchableOpacity style={styles.btnCancelar} onPress={()=>setVisible(false)}>
                         <Text style={styles.btnCancelarText}>Cancelar</Text>
                     </TouchableOpacity>
-
                 </View>
 
             </Modal>
@@ -59,13 +56,12 @@ const SelectInputPlaceholder = (props) => {
         </View>
     );
 
-
 }
 
 const styles = StyleSheet.create({
 
     content: {
-        marginBottom: 0
+        marginBottom: 16
     },
 
     selectInput: {
@@ -84,12 +80,22 @@ const styles = StyleSheet.create({
     selectText: {
         fontSize: 18,
         alignSelf: 'center',
+        display: 'flex'
+    },
+
+    selectTextInvisible: {
+        display: 'none',
     },
 
     selectTextPlaceholder: {
         fontSize: 18,
         alignSelf: 'center',
         color: "#ccc",
+        display: 'flex'
+    },
+    
+    selectTextPlaceholderInvisible: {
+        display: 'none',
     },
 
     selectIcon: {

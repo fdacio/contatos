@@ -10,27 +10,45 @@ import TextInputPlaceholder from '../../components/TextInputPlaceholder';
 import SelectInputPlaceholder from '../../components/SelectInputPlaceholder';
 import ButtonSearch from '../../components/Button';
 
-const FormSearch = (props) => {
-    
-    const [nome, setNome] = useState('');
-    const [grupo, setGrupo] = useState({});
-
-    return (
-        <View style={(props.visibleSearch) ? styles.containerSearch : styles.containerSearchInvisible}>
-            <TextInputPlaceholder placeholder="Nome" autoCapitalize="words" onChangeText={text => setNome(text)} value={nome} />
-            <SelectInputPlaceholder placeholder="Grupo" title="Grupos" text={grupo.nome} value={grupo.id} onSelectedItem={setGrupo} />
-            <ButtonSearch label="Pesquisar" onPress={() => { }} />
-        </View>
-
-    );
-}
 
 const ListContatos = ({ navigation, route }) => {
-
+    
     const [contatos, setContatos] = useState([]);
     const [isFreshing, setIsFreshing] = useState(false);
     const [message, setMessage] = useState();
     const [visibleSearch, setVisibleSearch] = useState(false);
+    const [grupos, setGrupos] = useState({});
+    
+    const FormSearch = (props) => {
+    
+        const [nome, setNome] = useState('');
+        const [grupo, setGrupo] = useState({});
+    
+        return (
+            <View style={(props.visibleSearch) ? styles.containerSearch : styles.containerSearchInvisible}>
+                <TextInputPlaceholder placeholder="Nome" autoCapitalize="words" onChangeText={text => setNome(text)} value={nome} />
+                <SelectInputPlaceholder placeholder="Grupo" title="Grupos" text={grupo.nome} value={grupo.id} dados={props.dados} onSelectedItem={setGrupo} />
+                <ButtonSearch label="Pesquisar" onPress={() => { }} />
+            </View>
+    
+        );
+       
+    }
+    const onLoadGrupos = async () => {
+        const url = 'https://contatos.daciosoftware.com.br/api/grupos';
+        await axios.get(url)
+            .then((response) => {
+                if (response.status == 200) {
+                    setGrupos(response.data);
+                }
+            })
+            .catch(function (error) {
+                if (error.toJSON().message === 'Network Error') {
+                    Alert.alert('Error: Ver conexão com a Internet');
+                    dispatch({ type: RELOAD });
+                }
+            });
+    };
 
     const onLoadList = async () => {
         console.log("Carregando Lista...");
@@ -54,19 +72,20 @@ const ListContatos = ({ navigation, route }) => {
 
     const onSearchVisible = () => {
         setVisibleSearch(!visibleSearch);
+        onLoadGrupos();
     }
-
+    
     useEffect(() => {
         setMessage(route?.params?.message);
         onLoadList();
         setVisibleSearch(false);
     }, [route]);
-    
-    
+
+
     return (
 
         <SafeAreaView style={styles.container}>
-            
+
             <Header title="Contatos" navigation={navigation} buttonsAction={
                 <View style={styles.buttonAction}>
                     <Button onPress={() => navigation.navigate('CreateContato')}
@@ -91,7 +110,7 @@ const ListContatos = ({ navigation, route }) => {
             }>
             </Header>
 
-            <FormSearch visibleSearch={visibleSearch} />
+            <FormSearch visibleSearch={visibleSearch} dados={grupos} />
 
             <Message message={message} visible={(message !== undefined)} navigation={navigation}></Message>
 
