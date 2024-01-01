@@ -9,7 +9,7 @@ import Message from '../../components/Message';
 import FormSearchContatos from './search';
 
 const ListContatos = ({ navigation, route }) => {
-    
+
     const [contatos, setContatos] = useState([]);
     const [isFreshing, setIsFreshing] = useState(false);
     const [message, setMessage] = useState();
@@ -19,7 +19,7 @@ const ListContatos = ({ navigation, route }) => {
     const onLoadList = async (nome, grupo) => {
         console.log("Carregando Lista...");
         setIsFreshing(true);
-        let nomeSearch = (nome != '') ? `nome=${nome}` : '';
+        let nomeSearch = (nome != undefined) ? `nome=${nome}` : '';
         let grupoSearch = (grupo != undefined && grupo.id != undefined) ? `&grupo=${grupo.id}` : '';
         const url = `https://contatos.daciosoftware.com.br/api/contatos/?${nomeSearch}${grupoSearch}`;
         console.log(url);
@@ -54,31 +54,31 @@ const ListContatos = ({ navigation, route }) => {
 
         <SafeAreaView style={styles.container}>
 
-            <Header title="Contatos" navigation={navigation} buttonsAction={
-                <View style={styles.buttonAction}>
-                    <Button onPress={() => navigation.navigate('CreateContato')}
-                        icon={
-                            <Icon
-                                name="plus"
-                                size={20}
-                                color="#fff" />
-                        }
-                        type="clear"
-                    />
-                    <Button onPress={() => onFormSearchVisible()}
-                        icon={
-                            <Icon
-                                name="search"
-                                size={20}
-                                color="#fff" />
-                        }
-                        type="clear"
-                    />
-                </View>
+            <Header title="Contatos" navigation={navigation} buttonsAction={[
+
+                <Button onPress={() => navigation.navigate('CreateContato')}
+                    icon={
+                        <Icon
+                            name="plus"
+                            size={20}
+                            color="#fff" />
+                    }
+                    type="clear"
+                />,
+                <Button onPress={() => onFormSearchVisible()}
+                    icon={
+                        <Icon
+                            name="search"
+                            size={20}
+                            color="#fff" />
+                    }
+                    type="clear"
+                />
+            ]
             }>
             </Header>
-            
-            <FormSearchContatos visibleSearch={visibleSearch} onSearch={onLoadList} />
+
+            {<FormSearchContatos visibleSearch={visibleSearch} onSearch={onLoadList} />}
 
             <Message message={message} visible={(message !== undefined)} navigation={navigation} />
 

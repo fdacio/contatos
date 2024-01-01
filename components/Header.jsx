@@ -6,7 +6,7 @@ import { Button } from 'react-native-elements';
 const Header = (props) => {
     return (
         <View style={styles.content}>
-            
+
             <View style={styles.buttonArrow}>
                 <Button
                     onPress={() => props.navigation.goBack()}
@@ -19,12 +19,14 @@ const Header = (props) => {
                     type="clear"
                 />
             </View>
-            
+
             <Text style={styles.title}>{props.title}</Text>
 
-            
-                {props.buttonsAction}
-            
+            <View style={styles.buttonAction}>
+                {(props.buttonsAction != undefined) ? props.buttonsAction.map((component, index) => component) : []}
+            </View>
+
+
 
         </View>
     );
@@ -55,6 +57,12 @@ const styles = StyleSheet.create({
         flexWrap: 'nowrap',
     },
 
+    buttonAction: {
+        flex: 1,
+        flexDirection: 'row',
+        alignItems: 'flex-end',
+        alignSelf: 'center',
+    }
 })
 
 export default Header

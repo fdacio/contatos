@@ -4,20 +4,20 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 const SelectInputPlaceholder = (props) => {
 
-    const [visible, setVisible] = useState(false);
+    const [visibleModal, setVisibleModal] = useState(false);
     const [itemSelected, setItemSelected] = useState();
 
     const onSelectedItem = ({ item }) => {
         let itemSelected = (item.id == props.value) ? {} : item
         setItemSelected(itemSelected);
-        setVisible(false);
+        setVisibleModal(false);
     }
 
     return (
 
         <View style={styles.content}>
 
-            <TouchableOpacity style={styles.selectInput} onPress={() => setVisible(true)}>
+            <TouchableOpacity style={styles.selectInput} onPress={() => setVisibleModal(true)}>
                 <Text style={[styles.selectText, (props.value == undefined) && styles.selectTextInvisible]}>
                     {props.text}{(itemSelected != undefined) ? itemSelected.nome : ''}
                 </Text>
@@ -27,7 +27,7 @@ const SelectInputPlaceholder = (props) => {
                 <Icon name="chevron-down" size={14} color="#000" style={styles.selectIcon} />
             </TouchableOpacity>
   
-            <Modal visible={visible} animationType="slide" >
+            <Modal visible={visibleModal} animationType="slide" >
                 <View style={styles.modalContent}>
                     <View style={styles.modalHeader}>
                         <View style={styles.modalHeaderContentTitle}>
@@ -46,7 +46,7 @@ const SelectInputPlaceholder = (props) => {
                         >
                         </FlatList>
                     </SafeAreaView>
-                    <TouchableOpacity style={styles.btnCancelar} onPress={()=>setVisible(false)}>
+                    <TouchableOpacity style={styles.btnCancelar} onPress={()=>setVisibleModal(false)}>
                         <Text style={styles.btnCancelarText}>Cancelar</Text>
                     </TouchableOpacity>
                 </View>
