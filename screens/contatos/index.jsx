@@ -6,10 +6,7 @@ import axios from 'axios';
 import Header from '../../components/Header';
 import Loading from '../../components/Loading';
 import Message from '../../components/Message';
-import TextInputPlaceholder from '../../components/TextInputPlaceholder';
-import SelectInputPlaceholder from '../../components/SelectInputPlaceholder';
-import ButtonSearch from '../../components/Button';
-
+import FormSearchContatos from './search';
 
 const ListContatos = ({ navigation, route }) => {
     
@@ -17,43 +14,15 @@ const ListContatos = ({ navigation, route }) => {
     const [isFreshing, setIsFreshing] = useState(false);
     const [message, setMessage] = useState();
     const [visibleSearch, setVisibleSearch] = useState(false);
-    const [grupos, setGrupos] = useState({});
-    
-    const FormSearch = (props) => {
-    
-        const [nome, setNome] = useState('');
-        const [grupo, setGrupo] = useState({});
-    
-        return (
-            <View style={(props.visibleSearch) ? styles.containerSearch : styles.containerSearchInvisible}>
-                <TextInputPlaceholder placeholder="Nome" autoCapitalize="words" onChangeText={text => setNome(text)} value={nome} />
-                <SelectInputPlaceholder placeholder="Grupo" title="Grupos" text={grupo.nome} value={grupo.id} dados={props.dados} onSelectedItem={setGrupo} />
-                <ButtonSearch label="Pesquisar" onPress={() => { }} />
-            </View>
-    
-        );
-       
-    }
-    const onLoadGrupos = async () => {
-        const url = 'https://contatos.daciosoftware.com.br/api/grupos';
-        await axios.get(url)
-            .then((response) => {
-                if (response.status == 200) {
-                    setGrupos(response.data);
-                }
-            })
-            .catch(function (error) {
-                if (error.toJSON().message === 'Network Error') {
-                    Alert.alert('Error: Ver conexão com a Internet');
-                    dispatch({ type: RELOAD });
-                }
-            });
-    };
 
-    const onLoadList = async () => {
+
+    const onLoadList = async (nome, grupo) => {
         console.log("Carregando Lista...");
         setIsFreshing(true);
-        const url = 'https://contatos.daciosoftware.com.br/api/contatos';
+        let nomeSearch = (nome != '') ? `nome=${nome}` : '';
+        let grupoSearch = (grupo != undefined && grupo.id != undefined) ? `&grupo=${grupo.id}` : '';
+        const url = `https://contatos.daciosoftware.com.br/api/contatos/?${nomeSearch}${grupoSearch}`;
+        console.log(url);
         await axios.get(url)
             .then((response) => {
                 if (response.status == 200) {
@@ -70,14 +39,13 @@ const ListContatos = ({ navigation, route }) => {
             });
     }
 
-    const onSearchVisible = () => {
+    const onFormSearchVisible = () => {
         setVisibleSearch(!visibleSearch);
-        onLoadGrupos();
     }
-    
+
     useEffect(() => {
-        setMessage(route?.params?.message);
         onLoadList();
+        setMessage(route?.params?.message);
         setVisibleSearch(false);
     }, [route]);
 
@@ -97,7 +65,7 @@ const ListContatos = ({ navigation, route }) => {
                         }
                         type="clear"
                     />
-                    <Button onPress={() => onSearchVisible()}
+                    <Button onPress={() => onFormSearchVisible()}
                         icon={
                             <Icon
                                 name="search"
@@ -109,10 +77,10 @@ const ListContatos = ({ navigation, route }) => {
                 </View>
             }>
             </Header>
+            
+            <FormSearchContatos visibleSearch={visibleSearch} onSearch={onLoadList} />
 
-            <FormSearch visibleSearch={visibleSearch} dados={grupos} />
-
-            <Message message={message} visible={(message !== undefined)} navigation={navigation}></Message>
+            <Message message={message} visible={(message !== undefined)} navigation={navigation} />
 
             <FlatList style={{ padding: 16 }}
                 data={contatos}
@@ -171,16 +139,6 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
     },
 
-    containerSearch: {
-        paddingHorizontal: 16,
-        paddingVertical: 16,
-        borderWidth: 1,
-        borderBottomColor: "#ccc",
-    },
-
-    containerSearchInvisible: {
-        display: 'none',
-    },
 
     itemName: {
         fontSize: 18,

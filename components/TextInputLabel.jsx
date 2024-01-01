@@ -15,9 +15,7 @@ const TextInputLabel = (props) => {
 const styles = StyleSheet.create({
 
     content: {
-        marginBottom: 0,
-        border: 1,
-        borderColor: 'red'
+        marginBottom: 0
     },
 
     textLabel: {
@@ -30,12 +28,12 @@ const styles = StyleSheet.create({
     },
 
     textInput: {
-        borderColor: '#000',
-        borderWidth: 1,
+        fontSize: 18,
         width: '100%',
         height: 48,
         padding: 8,
-        fontSize: 18,
+        borderColor: '#000',
+        borderWidth: 1,
         borderRadius: 4
     },
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text, TextInput } from 'react-native';
+import { StyleSheet, View, TextInput } from 'react-native';
 
 const TextInputPlaceholder = (props) => {
 
@@ -13,18 +13,16 @@ const TextInputPlaceholder = (props) => {
 const styles = StyleSheet.create({
 
     content: {
-        marginBottom: 16,
-        border: 1,
-        borderColor: 'red'
+        marginBottom: 16
     },
 
     textInput: {
-        borderColor: '#000',
-        borderWidth: 1,
+        fontSize: 18,
         width: '100%',
         height: 48,
         padding: 8,
-        fontSize: 18,
+        borderColor: '#000',
+        borderWidth: 1,
         borderRadius: 4
     },
 

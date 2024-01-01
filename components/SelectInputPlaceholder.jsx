@@ -5,11 +5,11 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 const SelectInputPlaceholder = (props) => {
 
     const [visible, setVisible] = useState(false);
-    const [placeholder, setPlaceholder] = useState(props.placeholder);
-    const setItem = props.onSelectedItem;
+    const [itemSelected, setItemSelected] = useState();
 
     const onSelectedItem = ({ item }) => {
-        setItem((item.id == props.value) ? {} : item);
+        let itemSelected = (item.id == props.value) ? {} : item
+        setItemSelected(itemSelected);
         setVisible(false);
     }
 
@@ -19,10 +19,10 @@ const SelectInputPlaceholder = (props) => {
 
             <TouchableOpacity style={styles.selectInput} onPress={() => setVisible(true)}>
                 <Text style={[styles.selectText, (props.value == undefined) && styles.selectTextInvisible]}>
-                    {props.text}
+                    {props.text}{(itemSelected != undefined) ? itemSelected.nome : ''}
                 </Text>
                 <Text style={[styles.selectTextPlaceholder, (props.value  != undefined) && styles.selectTextPlaceholderInvisible]}>
-                    {placeholder}
+                    {props.placeholder}
                 </Text>
                 <Icon name="chevron-down" size={14} color="#000" style={styles.selectIcon} />
             </TouchableOpacity>
