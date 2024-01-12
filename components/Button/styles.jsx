@@ -1,14 +1,4 @@
-import React from 'react';
-import { StyleSheet, Text, TouchableOpacity } from 'react-native';
-
-const Button = (props) => {
-
-    return (
-        <TouchableOpacity style={props.style || styles.button} onPress={props.onPress} disabled={props.disabled} >
-            <Text style={styles.textButton}>{props.label}</Text>
-        </TouchableOpacity>
-    );
-}
+import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
 
@@ -32,6 +22,6 @@ const styles = StyleSheet.create({
         color: 'white'
     }
 
-})
+});
 
-export default Button;
+export default styles;

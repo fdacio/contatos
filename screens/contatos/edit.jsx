@@ -7,6 +7,7 @@ import TextInputMaskLabel from '../../components/TextInputMaskLabel';
 import SelectInputLabel from '../../components/SelectInputLabel';
 import Header from '../../components/Header';
 import Loading from '../../components/Loading';
+import Message from '../../components/Message';
 
 const EditContato = ({ navigation, route }) => {
 
@@ -25,6 +26,7 @@ const EditContato = ({ navigation, route }) => {
     const labelBotao = "Alterar";
     const [labelButton, setLabelButton] = useState(labelBotao);
     const [loading, setLoading] = useState(false);
+    const [message, setMessage] = useState();
 
     const maskTelefone = ['(', /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
 
@@ -101,7 +103,8 @@ const EditContato = ({ navigation, route }) => {
         await axios.put(url, data)
             .then((response) => {
                 if (response.status == 200) {
-                    navigation.navigate('ListContatos', { message: "Registro alterado com sucesso" });
+                    setMessage("Registro alterado com sucesso");
+                    navigation.navigate('ListContatos');
                 }
             })
             .catch((error) => {
@@ -143,6 +146,8 @@ const EditContato = ({ navigation, route }) => {
 
             <Header title="Editar Contato" navigation={navigation} />
 
+            <Message message={message} visible={(message !== undefined)} />
+
             <ScrollView style={{ padding: 16 }}>
 
                 <TextInputLabel label="Nome" autoCapitalize="words" onChangeText={text => setNome(text)} alert={alertNome} value={nome} />
@@ -152,7 +157,7 @@ const EditContato = ({ navigation, route }) => {
                 <TextInputMaskLabel label="Telefone" mask={maskTelefone} keyboardType="phone-pad" onChangeText={setTelefone} alert={alertTelefone} value={telefone} />
 
                 <SelectInputLabel label="Grupo" title="Grupos" text={grupo.nome} value={grupo.id} dados={grupos} alert={alertGrupo} onSelectedItem={setGrupo}></SelectInputLabel>
-                
+
                 <View style={styles.bottomPosition}>
                     <Button label={labelButton} onPress={onUpdate} disabled={disabledButton} />
                 </View>

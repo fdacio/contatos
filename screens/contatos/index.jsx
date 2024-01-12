@@ -5,23 +5,26 @@ import { Button } from 'react-native-elements';
 import axios from 'axios';
 import Header from '../../components/Header';
 import Loading from '../../components/Loading';
-import Message from '../../components/Message';
+
 import FormSearchContatos from './search';
 
 const ListContatos = ({ navigation, route }) => {
 
     const [contatos, setContatos] = useState([]);
     const [isFreshing, setIsFreshing] = useState(false);
-    const [message, setMessage] = useState();
-    const [visibleSearch, setVisibleSearch] = useState(false);
+    const [formSearch, setFormSearch] = useState();
+    const [visibleFormSearch, setVisibleFormSearch] = useState(false);
 
+    let nomeSearch;
+    let grupoSearch;
 
-    const onLoadList = async (nome, grupo) => {
+    const onLoadList = async () => {
         console.log("Carregando Lista...");
+        console.log("Nome Search: " + nomeSearch);
         setIsFreshing(true);
-        let nomeSearch = (nome != undefined) ? `nome=${nome}` : '';
-        let grupoSearch = (grupo != undefined && grupo.id != undefined) ? `&grupo=${grupo.id}` : '';
-        const url = `https://contatos.daciosoftware.com.br/api/contatos/?${nomeSearch}${grupoSearch}`;
+        let nome = (nomeSearch != undefined) ? `nome=${nomeSearch}` : '';
+        let grupo = (grupoSearch != undefined && grupoSearch.id != undefined) ? `&grupo=${grupoSearch.id}` : '';
+        const url = `https://contatos.daciosoftware.com.br/api/contatos/?${nome}${grupo}`;
         console.log(url);
         await axios.get(url)
             .then((response) => {
@@ -39,16 +42,24 @@ const ListContatos = ({ navigation, route }) => {
             });
     }
 
-    const onFormSearchVisible = () => {
-        setVisibleSearch(!visibleSearch);
+    const onSetNome = (nome) => {
+        console.log("Nome no Index: " + nome);
+        nomeSearch = nome;
+    }
+
+    const onFormSearch = () => {
+        if (!visibleFormSearch) {
+            setFormSearch(<FormSearchContatos onSearch={onLoadList} onSetNome={onSetNome} />);
+        } else {
+            setFormSearch();
+        }
+        setVisibleFormSearch(!visibleFormSearch);
     }
 
     useEffect(() => {
         onLoadList();
-        setMessage(route?.params?.message);
-        setVisibleSearch(false);
-    }, [route]);
-
+        console.log("useEffect");
+    }, []);
 
     return (
 
@@ -64,8 +75,9 @@ const ListContatos = ({ navigation, route }) => {
                             color="#fff" />
                     }
                     type="clear"
+                    key="0"
                 />,
-                <Button onPress={() => onFormSearchVisible()}
+                <Button onPress={() => onFormSearch()}
                     icon={
                         <Icon
                             name="search"
@@ -73,14 +85,13 @@ const ListContatos = ({ navigation, route }) => {
                             color="#fff" />
                     }
                     type="clear"
+                    key="1"
                 />
             ]
             }>
             </Header>
 
-            {<FormSearchContatos visibleSearch={visibleSearch} onSearch={onLoadList} />}
-
-            <Message message={message} visible={(message !== undefined)} navigation={navigation} />
+            {formSearch}
 
             <FlatList style={{ padding: 16 }}
                 data={contatos}

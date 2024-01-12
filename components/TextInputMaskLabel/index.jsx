@@ -3,8 +3,9 @@
  * npm install react-native-mask-input
  */
 import React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { View, Text } from 'react-native';
 import MaskInput from 'react-native-mask-input';
+import styles from './styles';
 
 const TextInputMaskLabel = (props) => {
     const setValor = props.onChangeText;
@@ -17,32 +18,5 @@ const TextInputMaskLabel = (props) => {
     );
 }
 
-const styles = StyleSheet.create({
-
-    content: {
-        marginBottom: 0,
-    },
-
-    textLabel: {
-        fontSize: 18,
-        marginBottom: 0
-    },
-
-    textInput: {
-        borderColor: '#000',
-        borderWidth: 1,
-        width: '100%',
-        height: 48,
-        padding: 8,
-        fontSize: 18,
-        borderRadius: 4
-    },
-
-    textAlert: {
-        fontSize: 14,
-        color: 'red'
-    }
-
-})
 
 export default TextInputMaskLabel;

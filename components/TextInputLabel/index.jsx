@@ -1,5 +1,6 @@
 import React from 'react';
-import { StyleSheet, View, Text, TextInput } from 'react-native';
+import { View, Text, TextInput } from 'react-native';
+import styles from './styles';
 
 const TextInputLabel = (props) => {
 
@@ -11,37 +12,5 @@ const TextInputLabel = (props) => {
         </View>
     );
 }
-
-const styles = StyleSheet.create({
-
-    content: {
-        marginBottom: 0
-    },
-
-    textLabel: {
-        fontSize: 18,
-    },
-
-    textLabelInvisible: {
-        display: 'none',
-        height: 0
-    },
-
-    textInput: {
-        fontSize: 18,
-        width: '100%',
-        height: 48,
-        padding: 8,
-        borderColor: '#000',
-        borderWidth: 1,
-        borderRadius: 4
-    },
-
-    textAlert: {
-        fontSize: 14,
-        color: 'red'
-    }
-
-})
 
 export default TextInputLabel;

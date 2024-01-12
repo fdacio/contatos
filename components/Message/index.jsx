@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { View, Text } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Button } from 'react-native-elements';
+import styles from './styles';
 
 const Message = (props) => {
 
@@ -13,7 +14,6 @@ const Message = (props) => {
             setVisible(true);
             setMessage(props.message);
         }
-        props.navigation.setParams({'message' : null});
         const toRef = setTimeout(() => {
             setVisible(false);
             clearTimeout(toRef);
@@ -46,40 +46,5 @@ const Message = (props) => {
         </View>
     );
 }
-
-const styles = StyleSheet.create({
-
-    content: {
-        flexDirection: 'row',
-        backgroundColor: '#d4edda',
-        height: 52,
-        padding: 8,
-        borderRadius: 4,
-        borderColor: '#c3e6cb',
-        marginHorizontal: 8,
-        marginVertical: 4
-    },
-
-    message: {
-        fontSize: 18,
-        fontWeight: 'bold',
-        color: '#155724',
-        flex: 8,
-        alignItems: 'flex-start',
-        alignSelf: 'center',
-        marginStart: 4
-    },
-
-    buttonClose: {
-        flex: 1,
-        alignItems: 'flex-end',
-        alignSelf: 'flex-start',
-        width: 2,
-    },
-
-    messageInvisible: {
-        display: 'none'
-    },
-})
 
 export default Message

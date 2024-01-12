@@ -1,5 +1,6 @@
 import React from 'react';
-import { StyleSheet, View, ActivityIndicator } from 'react-native';
+import { View, ActivityIndicator } from 'react-native';
+import styles from './styles';
 
 const Loading = (props) => {
     return (
@@ -8,13 +9,5 @@ const Loading = (props) => {
         </View>
     );
 }
-
-const styles = StyleSheet.create({
-    container: {
-      position: 'absolute',
-      top: '50%',
-      alignSelf: 'center'
-    }
-  });
 
 export default Loading;

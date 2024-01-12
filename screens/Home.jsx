@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, SafeAreaView, TouchableOpacity, View, Image } from 'react-native';
-import HeaderHome from '../components/HeaderHome';
+import Header from '../components/Header';
 import Logo from '../assets/home.png'
 
 const Home = ({ navigation }) => {
@@ -8,7 +8,7 @@ const Home = ({ navigation }) => {
     return (
         <SafeAreaView style={styles.container}>
 
-            <HeaderHome title="Meus Contatos" navigation={navigation} />
+            <Header title="Meus Contatos" navigation={navigation} buttonBack={false}/>
             <View style={styles.contentImageHome}>
                 <TouchableOpacity style={styles.touchableImageHome}
                     onPress={() => navigation.navigate('MenuContatos')} >

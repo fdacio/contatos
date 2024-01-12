@@ -31,11 +31,18 @@ const FromSearchContatos = (props) => {
         onLoadGrupos();
     }, []);
 
+    const onSearch = () => {
+        console.log("Nome no Componente: " + nome);
+        console.log("Função Set Nome: " + props.onSetNome);
+        props.onSetNome(nome);
+        props.onSearch();
+    }
+
     return (
-        <View style={(props.visibleSearch) ? styles.containerSearch : styles.containerSearchInvisible}>
-            <TextInputPlaceholder placeholder="Nome" autoCapitalize="words" onChangeText={text => setNome(text)} value={nome} />
-            <SelectInputPlaceholder placeholder="Grupo" title="Grupos" text={(grupo != undefined) ? grupo.nome : ''} value={(grupo != undefined) ? grupo.id : ''} dados={grupos} />
-            <ButtonSearch label="Pesquisar" onPress={() => props.onSearch(nome, grupo)} />
+        <View style={styles.containerSearch}>
+            <TextInputPlaceholder placeholder="Nome" autoCapitalize="words" onChangeText={(text) => setNome(text)} />
+            <SelectInputPlaceholder placeholder="Grupo" title="Grupos" text={(grupo != undefined) ? grupo.nome : ''} value={(grupo != undefined) ? grupo.id : ''} dados={grupos} onSelectedItem={setGrupo}/>
+            <ButtonSearch label="Pesquisar" onPress={() => onSearch()} />
         </View>
     );
 }
