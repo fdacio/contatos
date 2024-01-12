@@ -7,6 +7,7 @@ import TextInputMaskLabel from '../../components/TextInputMaskLabel';
 import SelectInputLabel from '../../components/SelectInputLabel';
 import Header from '../../components/Header';
 import Loading from '../../components/Loading';
+import Message from '../../components/Message';
 
 const CreateContato = ({ navigation }) => {
 
@@ -19,6 +20,7 @@ const CreateContato = ({ navigation }) => {
     const [grupo, setGrupo] = useState({});
     const [alertGrupo, setAlertGrupo] = useState('');
     const [grupos, setGrupos] = useState({});
+    const [messageSuccess, setMessageSuccess] = useState('');
     const [messageError, setMessageError] = useState('');
     const [disabledButton, setDisabledButton] = useState(false);
     const labelBotao = "Salvar";
@@ -33,6 +35,7 @@ const CreateContato = ({ navigation }) => {
         setAlertTelefone('');
         setAlertGrupo('');
         setMessageError('');
+        setMessageSuccess('');
     };
 
     useEffect(() => {
@@ -73,11 +76,15 @@ const CreateContato = ({ navigation }) => {
         await axios.post(url, data)
             .then((response) => {
                 if (response.status == 201) {
-                    navigation.navigate('ListContatos', { message: "Registro realizado com sucesso" });
+                    setMessageSuccess("Registro cadastrado com sucesso");
+                    const toRef = setTimeout(() => {
+                        navigation.navigate('ListContatos');
+                        clearTimeout(toRef);
+                    }, 3000);
                 }
             })
             .catch((error) => {
-                console.log(error);
+
                 if (error.toJSON().message === 'Network Error') {
                     Alert.alert('Error: Ver conexão com a Internet');
                     dispatch({ type: RELOAD });
@@ -112,6 +119,8 @@ const CreateContato = ({ navigation }) => {
         <SafeAreaView style={styles.container}>
 
             <Header title="Cadastrar Contato" navigation={navigation} />
+
+            <Message message={messageSuccess} ></Message>
 
             <ScrollView style={{ padding: 16 }} >
 

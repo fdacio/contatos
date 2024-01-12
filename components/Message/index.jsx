@@ -14,10 +14,6 @@ const Message = (props) => {
             setVisible(true);
             setMessage(props.message);
         }
-        const toRef = setTimeout(() => {
-            setVisible(false);
-            clearTimeout(toRef);
-          }, 5000);
     }, [props.message]);
 
     const onClose = () => {

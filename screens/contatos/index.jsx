@@ -8,7 +8,7 @@ import Loading from '../../components/Loading';
 
 import FormSearchContatos from './search';
 
-const ListContatos = ({ navigation, route }) => {
+const ListContatos = ({ navigation }) => {
 
     const [contatos, setContatos] = useState([]);
     const [isFreshing, setIsFreshing] = useState(false);
@@ -57,9 +57,12 @@ const ListContatos = ({ navigation, route }) => {
     }
 
     useEffect(() => {
-        onLoadList();
-        console.log("useEffect");
-    }, []);
+        const unsubscribe = navigation.addListener('focus', async () => {
+            onLoadList();
+            console.log("useEffect");
+        });
+        return unsubscribe;
+    }, [navigation]);
 
     return (
 

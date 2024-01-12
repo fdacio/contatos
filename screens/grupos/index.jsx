@@ -5,13 +5,12 @@ import { Button } from 'react-native-elements';
 import axios from 'axios';
 import Header from '../../components/Header';
 import Loading from '../../components/Loading';
-import Message from '../../components/Message';
 
-const ListGrupos = ({ navigation, route }) => {
+
+const ListGrupos = ({ navigation }) => {
 
     const [grupos, setGrupos] = useState([]);
     const [isFreshing, setIsFreshing] = useState(false);
-    const [message, setMessage] = useState();
 
     const onLoadList = async () => {
         console.log("Carregando Lista...");
@@ -33,27 +32,26 @@ const ListGrupos = ({ navigation, route }) => {
     }
 
     useEffect(() => {
-        setMessage(route?.params?.message);
-        onLoadList();
-    }, [route]);
+        const unsubscribe = navigation.addListener('focus', async () => {
+            onLoadList();
+            console.log("useEffect");
+        });
+        return unsubscribe;
+    }, [navigation]);
 
     return (
         <SafeAreaView style={styles.container}>
-            <Header title="Grupos" navigation={navigation}
-                buttonsAction={
-                    <View style={styles.buttonAction}>
-                        <Button onPress={() => navigation.navigate('CreateGrupo')}
-                            icon={
-                                <Icon
-                                    name="plus"
-                                    size={20}
-                                    color="#fff" />
-                            }
-                            type="clear"
-                        /></View>}
-            />
-
-            <Message message={message} visible={(message !== undefined)} navigation={navigation}></Message>
+            <Header title="Grupos" navigation={navigation} buttonsAction={[
+                <Button onPress={() => navigation.navigate('CreateGrupo')}
+                    icon={
+                        <Icon
+                            name="plus"
+                            size={20}
+                            color="#fff" />
+                    }
+                    type="clear"
+                />]}
+            ></Header>
 
             <FlatList style={{ padding: 16 }}
                 data={grupos}
@@ -99,7 +97,7 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#fff',
     },
-    
+
     buttonAction: {
         flex: 1,
         alignItems: 'flex-end',

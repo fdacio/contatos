@@ -5,12 +5,14 @@ import Button from '../../components/Button';
 import TextInputLabel from '../../components/TextInputLabel';
 import Header from '../../components/Header';
 import Loading from '../../components/Loading';
+import Message from '../../components/Message';
 
 const EditGrupo = ({ navigation, route }) => {
 
     const [id, setId] = useState();
     const [nome, setNome] = useState('');
     const [alertNome, setAlertNome] = useState('');
+    const [messageSuccess, setMessageSuccess] = useState('');
     const [messageError, setMessageError] = useState('');
     const [disabledButton, setDisabledButton] = useState(false);
     const labelBotao = "Alterar";
@@ -64,7 +66,11 @@ const EditGrupo = ({ navigation, route }) => {
         await axios.put(url, data)
             .then((response) => {
                 if (response.status == 200) {
-                    navigation.navigate('ListGrupos', { message: "Registro alterado com sucesso" });
+                    setMessageSuccess("Registro alterado com sucesso");
+                    const toRef = setTimeout(() => {
+                        navigation.navigate('ListGrupos');
+                        clearTimeout(toRef);
+                    }, 3000);
                 }
             })
             .catch((error) => {
@@ -91,8 +97,10 @@ const EditGrupo = ({ navigation, route }) => {
     }
     return (
         <SafeAreaView style={styles.container}>
-            
+
             <Header title="Cadastrar Grupo" navigation={navigation} />
+
+            <Message message={messageSuccess} ></Message>
 
             <View style={{ padding: 16 }} >
 

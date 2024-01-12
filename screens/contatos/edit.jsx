@@ -21,12 +21,14 @@ const EditContato = ({ navigation, route }) => {
     const [grupo, setGrupo] = useState({});
     const [alertGrupo, setAlertGrupo] = useState('');
     const [grupos, setGrupos] = useState({})
+
+    const [messageSuccess, setMessageSuccess] = useState('');
     const [messageError, setMessageError] = useState('');
+
     const [disabledButton, setDisabledButton] = useState(false);
     const labelBotao = "Alterar";
     const [labelButton, setLabelButton] = useState(labelBotao);
     const [loading, setLoading] = useState(false);
-    const [message, setMessage] = useState();
 
     const maskTelefone = ['(', /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
 
@@ -36,9 +38,11 @@ const EditContato = ({ navigation, route }) => {
         setAlertTelefone('');
         setAlertGrupo('');
         setMessageError('');
+        setMessageSuccess('');
     };
 
     useEffect(() => {
+        console.log("useEffect Edit ...");
         onLoadGrupos();
         onLoadContato(route.params.id);
     }, []);
@@ -61,7 +65,6 @@ const EditContato = ({ navigation, route }) => {
 
     const onLoadContato = async (id) => {
         if (id === undefined) return;
-        console.log("Carregando Edit ...");
         setLoading(true);
 
         const url = 'https://contatos.daciosoftware.com.br/api/contatos/' + id;
@@ -103,8 +106,11 @@ const EditContato = ({ navigation, route }) => {
         await axios.put(url, data)
             .then((response) => {
                 if (response.status == 200) {
-                    setMessage("Registro alterado com sucesso");
-                    navigation.navigate('ListContatos');
+                    setMessageSuccess("Registro alterado com sucesso");
+                    const toRef = setTimeout(() => {
+                        navigation.navigate('ListContatos');
+                        clearTimeout(toRef);
+                    }, 3000);
                 }
             })
             .catch((error) => {
@@ -146,7 +152,7 @@ const EditContato = ({ navigation, route }) => {
 
             <Header title="Editar Contato" navigation={navigation} />
 
-            <Message message={message} visible={(message !== undefined)} />
+            <Message message={messageSuccess} />
 
             <ScrollView style={{ padding: 16 }}>
 

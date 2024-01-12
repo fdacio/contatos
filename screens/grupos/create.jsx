@@ -5,11 +5,13 @@ import axios from 'axios';
 import Button from '../../components/Button';
 import TextInputLabel from '../../components/TextInputLabel';
 import Loading from '../../components/Loading';
+import Message from '../../components/Message';
 
 const CreateGrupo = ({ navigation }) => {
 
     const [nome, setNome] = useState('');
     const [alertNome, setAlertNome] = useState('');
+    const [messageSuccess, setMessageSuccess] = useState('');
     const [messageError, setMessageError] = useState('');
     const [disabledButton, setDisabledButton] = useState(false);
     const labelBotao = "Salvar";
@@ -36,7 +38,11 @@ const CreateGrupo = ({ navigation }) => {
         await axios.post(url, data)
             .then((response) => {
                 if (response.status == 201) {
-                    navigation.navigate('ListGrupos', { message: "Registro realizado com sucesso" });
+                    setMessageSuccess("Registro cadastrado com sucesso");
+                    const toRef = setTimeout(() => {
+                        navigation.navigate('ListGrupos');
+                        clearTimeout(toRef);
+                    }, 3000);
                 }
             })
             .catch((error) => {
@@ -67,11 +73,13 @@ const CreateGrupo = ({ navigation }) => {
 
             <Header title="Cadastrar Grupo" navigation={navigation} />
 
+            <Message message={messageSuccess} ></Message>
+
             <View style={{ padding: 16 }} >
 
                 <TextInputLabel label="Nome" autoCapitalize="words" onChangeText={text => setNome(text)} alert={alertNome} value={nome} />
 
-                 <View style={styles.bottomPosition}>
+                <View style={styles.bottomPosition}>
                     <Button label={labelButton} onPress={onCreate} disabled={disabledButton} />
                 </View>
 
