@@ -25,10 +25,6 @@ const Styles = StyleSheet.create({
         display: 'flex'
     },
 
-    selectTextInvisible: {
-        display: 'none',
-    },
-
     selectTextPlaceholder: {
         fontSize: 18,
         alignSelf: 'center',
@@ -36,10 +32,6 @@ const Styles = StyleSheet.create({
         display: 'flex'
     },
     
-    selectTextPlaceholderInvisible: {
-        display: 'none',
-    },
-
     selectIcon: {
         alignSelf: 'center',
     },

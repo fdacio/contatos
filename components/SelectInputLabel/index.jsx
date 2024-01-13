@@ -5,12 +5,12 @@ import styles from './styles';
 
 const SelectInputLabel = (props) => {
 
-    const [visible, setVisible] = useState(false);
+    const [visibleModal, setVisibleModal] = useState(false);
     const setItem = props.onSelectedItem;
 
     const onSelectedItem = ({ item }) => {
         setItem((item.id == props.value) ? {} : item);
-        setVisible(false);
+        setVisibleModal(false);
     }
 
     return (
@@ -18,7 +18,7 @@ const SelectInputLabel = (props) => {
         <View style={styles.content}>
 
             <Text style={[styles.textLabel, (props.label == '' && styles.textLabelInvisible)]}>{props.label}</Text>
-            <TouchableOpacity style={styles.selectInput} onPress={() => setVisible(true)}>
+            <TouchableOpacity style={styles.selectInput} onPress={() => setVisibleModal(true)}>
                 <Text style={styles.selectText}>
                     {props.text}
                 </Text>
@@ -26,7 +26,7 @@ const SelectInputLabel = (props) => {
             </TouchableOpacity>
             <Text style={styles.textAlert}>{props.alert}</Text>
 
-            <Modal visible={visible} animationType="slide" >
+            <Modal visible={visibleModal} animationType="slide" >
                 <View style={styles.modalContent}>
                     <View style={styles.modalHeader}>
                         <View style={styles.modalHeaderContentTitle}>
@@ -43,11 +43,11 @@ const SelectInputLabel = (props) => {
                                 </TouchableOpacity>
                             }
                         >
-
                         </FlatList>
+
                     </SafeAreaView>
 
-                    <TouchableOpacity style={styles.btnCancelar} onPress={()=>setVisible(false)}>
+                    <TouchableOpacity style={styles.btnCancelar} onPress={()=>setVisibleModal(false)}>
                         <Text style={styles.btnCancelarText}>Cancelar</Text>
                     </TouchableOpacity>
 

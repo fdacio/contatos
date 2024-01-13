@@ -32,8 +32,6 @@ const FromSearchContatos = (props) => {
     }, []);
 
     const onSearch = () => {
-        console.log("Nome no Componente: " + nome);
-        console.log("Função Set Nome: " + props.onSetNome);
         props.onSetNome(nome);
         props.onSearch();
     }

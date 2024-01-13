@@ -1,16 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, Modal, TouchableOpacity, SafeAreaView, FlatList } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import styles from './styles';
 
 const SelectInputPlaceholder = (props) => {
 
+    
+    const [visibleText, setVisibleText] = useState(false);
+    const [visiblePlaceholder, setVisiblePlaceholder] = useState(true);
     const [visibleModal, setVisibleModal] = useState(false);
-    const [itemSelected, setItemSelected] = useState();
-
-    const onSelectedItem = ({ item }) => {
-        let itemSelected = (item.id == props.value) ? {} : item
-        setItemSelected(itemSelected);
+    const setItem = props.onSelectedItem;
+    
+    
+    const onSelectItem = ( {item} ) => {
+        if (item.id != props.value) {
+            setItem(item);
+            setVisibleText(true);
+            setVisiblePlaceholder(false);    
+        } else {
+            setItem();
+            setVisibleText(false);
+            setVisiblePlaceholder(true);    
+        }
         setVisibleModal(false);
     }
 
@@ -19,12 +30,16 @@ const SelectInputPlaceholder = (props) => {
         <View style={styles.content}>
 
             <TouchableOpacity style={styles.selectInput} onPress={() => setVisibleModal(true)}>
-                <Text style={[styles.selectText, (props.text !== '') && styles.selectTextInvisible]}>
+                {(visibleText) &&
+                <Text style={styles.selectText}>
                     {props.text}
                 </Text>
-                <Text style={[styles.selectTextPlaceholder, (props.text  !== '') && styles.selectTextPlaceholderInvisible]}>
+                }
+                {(visiblePlaceholder) &&
+                <Text style={styles.selectTextPlaceholder}>
                     {props.placeholder}
                 </Text>
+                }
                 <Icon name="chevron-down" size={14} color="#000" style={styles.selectIcon} />
             </TouchableOpacity>
   
@@ -40,7 +55,7 @@ const SelectInputPlaceholder = (props) => {
                             data={props.dados}
                             keyExtractor={(item) => item.id}
                             renderItem={({ item }) =>
-                                <TouchableOpacity style={[styles.contentItem, (props.value == item.id ? {'backgroundColor' : '#a5b8f2'} : '')]} onPress={() => onSelectedItem({item})}>
+                                <TouchableOpacity style={[styles.contentItem, (props.value == item.id ? {'backgroundColor' : '#a5b8f2'} : '')]} onPress={() => onSelectItem({item})}>
                                     <Text style={styles.textItem}>{item.nome}</Text>
                                 </TouchableOpacity>
                             }
