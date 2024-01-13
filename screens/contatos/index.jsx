@@ -41,13 +41,15 @@ const ListContatos = ({ navigation }) => {
     }
 
     const onSetNome = (nome) => {
-        console.log("Nome no Index: " + nome);
         nomeSearch = nome;
+    }
+    const onSetGrupo = (grupo) => {
+        grupoSearch = grupo;
     }
 
     const onFormSearch = () => {
         if (!visibleFormSearch) {
-            setFormSearch(<FormSearchContatos onSearch={onLoadList} onSetNome={onSetNome} />);
+            setFormSearch(<FormSearchContatos onSearch={onLoadList} onSetNome={onSetNome} onSetGrupo={onSetGrupo}/>);
         } else {
             setFormSearch();
         }
@@ -97,7 +99,6 @@ const ListContatos = ({ navigation }) => {
             <FlatList style={{ padding: 16 }}
                 data={contatos}
                 refreshing={isFreshing}
-                onEndReached={onLoadList}
                 onEndReachedThreshold={0.5}
                 keyExtractor={(item) => item.id}
                 renderItem={({ item }) =>

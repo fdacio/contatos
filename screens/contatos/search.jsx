@@ -5,7 +5,7 @@ import TextInputPlaceholder from '../../components/TextInputPlaceholder';
 import SelectInputPlaceholder from '../../components/SelectInputPlaceholder';
 import ButtonSearch from '../../components/Button';
 
-const FromSearchContatos = (props) => {
+const FormSearchContatos = (props) => {
 
     const [grupos, setGrupos] = useState();
     const [nome, setNome] = useState('');
@@ -33,6 +33,7 @@ const FromSearchContatos = (props) => {
 
     const onSearch = () => {
         props.onSetNome(nome);
+        props.onSetGrupo(grupo);
         props.onSearch();
     }
 
@@ -56,4 +57,4 @@ const styles = StyleSheet.create({
 
 });
 
-export default FromSearchContatos;
+export default FormSearchContatos;
