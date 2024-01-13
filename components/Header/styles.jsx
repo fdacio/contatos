@@ -28,7 +28,7 @@ const Styles = StyleSheet.create({
     buttonAction: {
         flex: 1,
         flexDirection: 'row',
-        alignItems: 'flex-end',
+        justifyContent: 'flex-end',
         alignSelf: 'center',
     }
 });

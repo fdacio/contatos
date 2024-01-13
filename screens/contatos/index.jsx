@@ -19,8 +19,6 @@ const ListContatos = ({ navigation }) => {
     let grupoSearch;
 
     const onLoadList = async () => {
-        console.log("Carregando Lista...");
-        console.log("Nome Search: " + nomeSearch);
         setIsFreshing(true);
         let nome = (nomeSearch != undefined) ? `nome=${nomeSearch}` : '';
         let grupo = (grupoSearch != undefined && grupoSearch.id != undefined) ? `&grupo=${grupoSearch.id}` : '';
