@@ -34,7 +34,7 @@ const FormSearchContatos = (props) => {
     const onSearch = () => {
         props.onSetNome(nome);
         props.onSetGrupo(grupo);
-        props.onSearch();
+        props.onSearch(props.url);
     }
 
     return (

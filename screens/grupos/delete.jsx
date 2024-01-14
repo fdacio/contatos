@@ -4,6 +4,7 @@ import axios from 'axios';
 import Header from '../../components/Header';
 import Button from '../../components/Button';
 import Loading from '../../components/Loading';
+import Message from '../../components/Message';
 
 const DeleteGrupo = ({ navigation, route }) => {
 
@@ -56,7 +57,11 @@ const DeleteGrupo = ({ navigation, route }) => {
         await axios.delete(url)
             .then((response) => {
                 if (response.status == 204) {
-                    navigation.navigate('ListGrupos', { message: 'Registro excluído com sucesso.' });
+                    setMessageSuccess("Registro excluído com sucesso");
+                    const toRef = setTimeout(() => {
+                        navigation.goBack();
+                        clearTimeout(toRef);
+                    }, 3000);
                 }
             })
             .catch((error) => {
@@ -81,6 +86,8 @@ const DeleteGrupo = ({ navigation, route }) => {
             
             <Header title="Deletar Grupo" navigation={navigation} />
 
+            <Message message={messageSuccess} ></Message>
+            
             <View style={{ padding: 16 }} >
 
                 <View style={styles.contentDados}>

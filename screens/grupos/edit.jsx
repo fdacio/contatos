@@ -68,7 +68,7 @@ const EditGrupo = ({ navigation, route }) => {
                 if (response.status == 200) {
                     setMessageSuccess("Registro alterado com sucesso");
                     const toRef = setTimeout(() => {
-                        navigation.navigate('ListGrupos');
+                        navigation.goBack();
                         clearTimeout(toRef);
                     }, 3000);
                 }

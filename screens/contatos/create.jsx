@@ -78,7 +78,7 @@ const CreateContato = ({ navigation }) => {
                 if (response.status == 201) {
                     setMessageSuccess("Registro cadastrado com sucesso");
                     const toRef = setTimeout(() => {
-                        navigation.navigate('ListContatos');
+                        navigation.goBack();
                         clearTimeout(toRef);
                     }, 3000);
                 }

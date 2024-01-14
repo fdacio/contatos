@@ -4,10 +4,12 @@ import axios from 'axios';
 import Header from '../../components/Header';
 import Button from '../../components/Button';
 import Loading from '../../components/Loading';
+import Message from '../../components/Message';
 
 const DeleteContato= ({ navigation, route }) => {
 
     const [contato, setContato] = useState([]);
+    const [messageSuccess, setMessageSuccess] = useState('');
     const [messageError, setMessageError] = useState('');
     const [disabledButton, setDisabledButton] = useState(false);
     const labelBotao = "Deletar";
@@ -56,7 +58,11 @@ const DeleteContato= ({ navigation, route }) => {
         await axios.delete(url)
             .then((response) => {
                 if (response.status == 204) {
-                    navigation.navigate('ListContatos', { message: 'Registro excluído com sucesso.' });
+                    setMessageSuccess("Registro excluído com succeso");
+                    const toRef = setTimeout(() => {
+                        navigation.goBack();
+                        clearTimeout(toRef);
+                    }, 3000);
                 }
             })
             .catch((error) => {
@@ -80,6 +86,8 @@ const DeleteContato= ({ navigation, route }) => {
         <SafeAreaView style={styles.container}>
 
             <Header title="Deletar Contato" navigation={navigation} />
+
+            <Message message={messageSuccess} ></Message>
 
             <View style={{ padding: 16 }} >
 
