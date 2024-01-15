@@ -6,9 +6,8 @@ import SelectInputPlaceholder from '../../components/SelectInputPlaceholder';
 import ButtonSearch from '../../components/Button';
 
 const FormSearchContatos = (props) => {
-
     const [grupos, setGrupos] = useState();
-    const [nome, setNome] = useState('');
+    const [nome, setNome] = useState();
     const [grupo, setGrupo] = useState();
 
     const onLoadGrupos = async () => {
@@ -32,14 +31,16 @@ const FormSearchContatos = (props) => {
     }, []);
 
     const onSearch = () => {
-        props.onSetNome(nome);
-        props.onSetGrupo(grupo);
-        props.onSearch(props.url);
+        let params = "";
+        if (nome != undefined) params += '&nome=' + nome;
+        if (grupo != undefined) params += '&grupo='+grupo.id;
+        props.onSetParams(params);
+        props.onSearch(props.url+params);
     }
 
     return (
         <View style={styles.containerSearch}>
-            <TextInputPlaceholder placeholder="Nome" autoCapitalize="words" onChangeText={(text) => setNome(text)} />
+            <TextInputPlaceholder placeholder="Nome" autoCapitalize="words" onChangeText={ (text) => setNome(text) } value={nome} />
             <SelectInputPlaceholder placeholder="Grupo" title="Grupos" text={(grupo != undefined) ? grupo.nome : ''} value={(grupo != undefined) ? grupo.id : ''} dados={grupos} onSelectedItem={setGrupo}/>
             <ButtonSearch label="Pesquisar" onPress={() => onSearch()} />
         </View>

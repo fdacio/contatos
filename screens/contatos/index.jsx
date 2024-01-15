@@ -16,28 +16,29 @@ const ListContatos = ({ navigation }) => {
     const [totalRegistros, setTotalRegistros] = useState();
     const [isFreshing, setIsFreshing] = useState(false);
     const [formSearch, setFormSearch] = useState();
+    const [params, setParams] = useState("")
     const [visibleFormSearch, setVisibleFormSearch] = useState(false);
     const [urlPreviorPage, setUrlPreviorPage] = useState();
-    const [urlDefault, setUrlDefaul] = useState();
     const [urlNextPage, setUrlNextPage] = useState();
+    
+    const [sizePage, setSizePage] = useState(20);
+    const [urlDefault, setUrlDefault] = useState(`https://contatos.daciosoftware.com.br/api/contatos/pageable?page=1&size=${sizePage}`);
 
-    let nomeSearch;
-    let grupoSearch;
 
     const onLoadList = async (url) => {
+
         if (isFreshing) return;
         setIsFreshing(true);
-        let nome = (nomeSearch != undefined) ? `&nome=${nomeSearch}` : '';
-        let grupo = (grupoSearch != undefined && grupoSearch.id != undefined) ? `&grupo=${grupoSearch.id}` : '';
-        let uri = `${url}${nome}${grupo}`;
-        console.log("uri:" + uri);
-        await axios.get(uri)
+
+        console.log("URL Get: " + url);
+
+        await axios.get(url)
             .then((response) => {
                 if (response.status == 200) {
                     setContatos(response.data.data);
                     setTotalRegistros(response.data.total);
-                    setUrlPreviorPage((response.data.prev_page_url != null) ? response.data.prev_page_url + '&size=' + response.data.per_page : uri);
-                    setUrlNextPage((response.data.next_page_url) ? response.data.next_page_url + '&size=' + response.data.per_page : uri) 
+                    setUrlPreviorPage((response.data.prev_page_url != null) ? response.data.prev_page_url + '&size=' + response.data.per_page + params: url+params);
+                    setUrlNextPage((response.data.next_page_url != null) ? response.data.next_page_url + '&size=' + response.data.per_page + params: url+params) 
                     setIsFreshing(false);
                     flatListRef.current.scrollToOffset({ animated: false, offset: 0 });
                 }
@@ -51,17 +52,9 @@ const ListContatos = ({ navigation }) => {
             });
     }
 
-    const onSetNome = (nome) => {
-        nomeSearch = nome;
-    }
-
-    const onSetGrupo = (grupo) => {
-        grupoSearch = grupo;
-    }
-
     const onFormSearch = () => {
         if (!visibleFormSearch) {
-            setFormSearch(<FormSearchContatos onSearch={onLoadList} url={`https://contatos.daciosoftware.com.br/api/contatos/pageable/?`} onSetNome={onSetNome} onSetGrupo={onSetGrupo} />);
+            setFormSearch(<FormSearchContatos onSearch={onLoadList} url={urlDefault} onSetParams={setParams} />);
         } else {
             setFormSearch();
         }
@@ -77,10 +70,9 @@ const ListContatos = ({ navigation }) => {
     }
 
     useEffect(() => {
-        const size = 20;
         const unsubscribe = navigation.addListener('focus', async () => {
             console.log("useEffect");
-            onLoadList(`https://contatos.daciosoftware.com.br/api/contatos/pageable?page=1&size=${size}`);
+            onLoadList(urlDefault);
         });
         return unsubscribe;
     }, [navigation]);
