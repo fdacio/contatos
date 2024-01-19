@@ -9,6 +9,41 @@ const FormSearchContatos = (props) => {
     const [grupos, setGrupos] = useState();
     const [nome, setNome] = useState();
     const [grupo, setGrupo] = useState();
+    const [params, setParams] = useState({});
+
+    const onSetGrupoParam = (grupo) => {
+        let dodos = {}
+        if (grupo != undefined) {
+            dodos = {
+                "grupo" : grupo.id,
+                "nome": nome
+            };
+        } else {
+            dodos = {
+                "grupo" : "",
+                "nome": nome
+            };
+        }
+        setGrupo(grupo);
+        setParams(dodos);
+    }
+
+    const onSetNomeParam = (nome) => {
+        setNome(nome);
+        let dodos = {
+            "grupo" : ((grupo != undefined) ? grupo.id : ""),
+            "nome": nome
+        };
+        setParams(dodos);
+    }
+
+    const parseParams = (params) => {
+        let p = "";
+        p = (params.nome != undefined) ? '&nome=' + params.nome : '';
+        p +=  (params.grupo != undefined) ? '&grupo=' + params.grupo : '';
+        return p;
+    }
+    
 
     const onLoadGrupos = async () => {
         const url = 'https://contatos.daciosoftware.com.br/api/grupos';
@@ -31,17 +66,13 @@ const FormSearchContatos = (props) => {
     }, []);
 
     const onSearch = () => {
-        let params = "";
-        if (nome != undefined) params += '&nome=' + nome;
-        if (grupo != undefined) params += '&grupo='+grupo.id;
-        props.onSetParams(params);
-        props.onSearch(props.url+params);
+        props.onSearch(props.url+parseParams(params));
     }
 
     return (
         <View style={styles.containerSearch}>
-            <TextInputPlaceholder placeholder="Nome" autoCapitalize="words" onChangeText={ (text) => setNome(text) } value={nome} />
-            <SelectInputPlaceholder placeholder="Grupo" title="Grupos" text={(grupo != undefined) ? grupo.nome : ''} value={(grupo != undefined) ? grupo.id : ''} dados={grupos} onSelectedItem={setGrupo}/>
+            <TextInputPlaceholder placeholder="Nome" autoCapitalize="words" onChangeText={(text) => onSetNomeParam(text)} value={nome} />
+            <SelectInputPlaceholder placeholder="Grupo" title="Grupos" text={(grupo != undefined) ? grupo.nome : ''} value={(grupo != undefined) ? grupo.id : ''} dados={grupos} onSelectedItem={onSetGrupoParam} />
             <ButtonSearch label="Pesquisar" onPress={() => onSearch()} />
         </View>
     );

@@ -14,16 +14,31 @@ const Pagination = (props) => {
                 {(props.actions != undefined) && props.actions.map((action, index) => 
                     <View key={index}>
                         <TouchableOpacity onPress={() => {action.action() }} style={styles.actionButton}>
+                        
+                        {(action.key === 'fp') &&
+                            <Icon
+                                name="angle-double-left"
+                                size={40}
+                                color="#ccc"
+                            />
+                        }
                         {(action.key === 'pp') &&
                             <Icon
-                                name="caret-left"
+                                name="angle-left"
                                 size={40}
                                 color="#ccc"
                             />
                         }
                         {(action.key === 'np') &&
                             <Icon
-                                name="caret-right"
+                                name="angle-right"
+                                size={40}
+                                color="#ccc"
+                            />
+                        }
+                        {(action.key === 'lp') &&
+                            <Icon
+                                name="angle-double-right"
                                 size={40}
                                 color="#ccc"
                             />

@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 const Styles = StyleSheet.create({
     
     content: {
-
+        padding: 8
     },
 
     contentButton: {

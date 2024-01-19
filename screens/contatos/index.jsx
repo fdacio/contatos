@@ -16,11 +16,12 @@ const ListContatos = ({ navigation }) => {
     const [totalRegistros, setTotalRegistros] = useState();
     const [isFreshing, setIsFreshing] = useState(false);
     const [formSearch, setFormSearch] = useState();
-    const [params, setParams] = useState("")
     const [visibleFormSearch, setVisibleFormSearch] = useState(false);
+    const [urlFirstPage, setUrlFirstPage] = useState();
     const [urlPreviorPage, setUrlPreviorPage] = useState();
     const [urlNextPage, setUrlNextPage] = useState();
-    
+    const [urlLastPage, setUrlLastPage] = useState();
+
     const [sizePage, setSizePage] = useState(20);
     const [urlDefault, setUrlDefault] = useState(`https://contatos.daciosoftware.com.br/api/contatos/pageable?page=1&size=${sizePage}`);
 
@@ -32,13 +33,16 @@ const ListContatos = ({ navigation }) => {
 
         console.log("URL Get: " + url);
 
+
         await axios.get(url)
             .then((response) => {
                 if (response.status == 200) {
                     setContatos(response.data.data);
                     setTotalRegistros(response.data.total);
-                    setUrlPreviorPage((response.data.prev_page_url != null) ? response.data.prev_page_url + '&size=' + response.data.per_page + params: url+params);
-                    setUrlNextPage((response.data.next_page_url != null) ? response.data.next_page_url + '&size=' + response.data.per_page + params: url+params) 
+                    setUrlFirstPage((response.data.first_page_url != null) ? response.data.first_page_url : url);
+                    setUrlPreviorPage((response.data.prev_page_url != null) ? response.data.prev_page_url : url);
+                    setUrlNextPage((response.data.next_page_url != null) ? response.data.next_page_url : url)
+                    setUrlLastPage((response.data.last_page_url != null) ? response.data.last_page_url : url);
                     setIsFreshing(false);
                     flatListRef.current.scrollToOffset({ animated: false, offset: 0 });
                 }
@@ -54,19 +58,24 @@ const ListContatos = ({ navigation }) => {
 
     const onFormSearch = () => {
         if (!visibleFormSearch) {
-            setFormSearch(<FormSearchContatos onSearch={onLoadList} url={urlDefault} onSetParams={setParams} />);
+            setFormSearch(<FormSearchContatos onSearch={onLoadList} url={urlDefault} />);
         } else {
             setFormSearch();
         }
         setVisibleFormSearch(!visibleFormSearch);
     }
 
+    const onFirstPage = () => {
+        onLoadList(urlFirstPage);
+    }
     const onPreviorPage = () => {
         onLoadList(urlPreviorPage);
     }
-
     const onNextPage = () => {
         onLoadList(urlNextPage);
+    }
+    const onLastPage = () => {
+        onLoadList(urlLastPage);
     }
 
     useEffect(() => {
@@ -151,13 +160,21 @@ const ListContatos = ({ navigation }) => {
 
             <Pagination totalRegistros={totalRegistros} actions={[
                 {
+                    'key': 'fp',
+                    'action': onFirstPage
+                },
+                {
                     'key': 'pp',
                     'action': onPreviorPage
                 },
                 {
                     'key': 'np',
                     'action': onNextPage
-                }
+                },
+                {
+                    'key': 'lp',
+                    'action': onLastPage
+                },
             ]}></Pagination>
 
         </SafeAreaView>
@@ -185,18 +202,18 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1,
         paddingVertical: 8,
     },
-    
+
     itemContentRow: {
         flexDirection: 'row',
         justifyContent: 'space-between'
     },
-    
+
     textItemName: {
         fontSize: 18,
         height: 35,
         fontWeight: 'bold',
     },
-    
+
     textItem: {
         fontSize: 16,
         height: 25,
