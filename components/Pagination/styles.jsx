@@ -6,12 +6,23 @@ const Styles = StyleSheet.create({
         padding: 8
     },
 
-    contentButton: {
+    contentButtons: {
+        flexDirection: 'row',
+    },
+
+    buttonLoad: {
+        flex: 1,
+        alignContent: 'flex-start',
+    },
+
+    contentNavigationButton: {
+        flex: 2,
         flexDirection: 'row',
         justifyContent: 'center',
     },
 
-    actionButton:{
+
+    navigationButton:{
         paddingHorizontal: 16
     },
 

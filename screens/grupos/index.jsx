@@ -50,6 +50,7 @@ const ListGrupos = ({ navigation }) => {
                             color="#fff" />
                     }
                     type="clear"
+                    key="0"
                 />]}
             ></Header>
 

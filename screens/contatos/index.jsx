@@ -77,6 +77,9 @@ const ListContatos = ({ navigation }) => {
     const onLastPage = () => {
         onLoadList(urlLastPage);
     }
+    const onRefreshPages = () => {
+        onLoadList(urlDefault);
+    } 
 
     useEffect(() => {
         const unsubscribe = navigation.addListener('focus', async () => {
@@ -158,7 +161,7 @@ const ListContatos = ({ navigation }) => {
 
             <Loading loading={isFreshing} />
 
-            <Pagination totalRegistros={totalRegistros} actions={[
+            <Pagination totalRegistros={totalRegistros} onRefresh={onRefreshPages} actions={[
                 {
                     'key': 'fp',
                     'action': onFirstPage

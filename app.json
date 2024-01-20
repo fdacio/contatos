@@ -2,7 +2,7 @@
   "expo": {
     "name": "Contatos",
     "slug": "contatos",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -17,7 +17,7 @@
     },
     "ios": {
       "bundleIndentify": "br.com.daciosoftware.contatos",
-      "buildNumber": "1.0.1"
+      "buildNumber": "1.0.2"
     },
     "extra": {
       "eas": {
