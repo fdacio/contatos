@@ -68,10 +68,10 @@ const DeleteGrupo = ({ navigation, route }) => {
             .catch((error) => {
                 console.log(error.response.data);
                 if (error.toJSON().message === 'Network Error') {
-                    Alert.alert('Error: Ver conexão com a Internet');
+                    Alert.alert("Erro", "Ver conexão com a internet");
                     dispatch({ type: RELOAD });
                 } else {
-                    setMessageError('Error ao excluir o registro: ' + error.response.data.error);
+                    setMessageError('Erro ao excluir o registro: ' + error.response.data.error);
                 }
             })
             .finally(function () {

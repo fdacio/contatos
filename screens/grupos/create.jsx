@@ -48,7 +48,7 @@ const CreateGrupo = ({ navigation }) => {
             .catch((error) => {
                 console.log(error);
                 if (error.toJSON().message === 'Network Error') {
-                    Alert.alert('Error: Ver conexão com a Internet');
+                    Alert.alert("Erro", "Ver conexão com a internet");
                     dispatch({ type: RELOAD });
                 }
                 if (error.response.data !== undefined) {
@@ -56,7 +56,7 @@ const CreateGrupo = ({ navigation }) => {
                         setAlertNome(error.response.data.nome);
                     }
                 } else {
-                    setMessageError('Error ao criar registro: ' + error.response.data.error);
+                    setMessageError('Erro ao criar registro: ' + error.response.data.error);
                 }
             })
             .finally(function () {

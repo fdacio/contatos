@@ -52,7 +52,7 @@ const CreateContato = ({ navigation }) => {
             })
             .catch(function (error) {
                 if (error.toJSON().message === 'Network Error') {
-                    Alert.alert('Error: Ver conexão com a Internet');
+                    Alert.alert("Erro", "Ver conexão com a internet");
                     dispatch({ type: RELOAD });
                 }
             });
@@ -86,7 +86,7 @@ const CreateContato = ({ navigation }) => {
             .catch((error) => {
 
                 if (error.toJSON().message === 'Network Error') {
-                    Alert.alert('Error: Ver conexão com a Internet');
+                    Alert.alert("Erro", "Ver conexão com a internet");
                     dispatch({ type: RELOAD });
                 }
                 if (error.response.data !== undefined) {
@@ -96,14 +96,14 @@ const CreateContato = ({ navigation }) => {
                     if (error.response.data.email != undefined) {
                         setAlertEmail(error.response.data.email);
                     }
-                    if (error.response.data.email != undefined) {
+                    if (error.response.data.telefone != undefined) {
                         setAlertTelefone(error.response.data.telefone);
                     }
                     if (error.response.data.id_grupo != undefined) {
                         setAlertGrupo(error.response.data.id_grupo);
                     }
                 } else {
-                    setMessageError('Error ao criar registro: ' + error.response.data.error);
+                    setMessageError('Erro ao criar registro: ' + error.response.data.error);
                 }
             })
             .finally(function () {

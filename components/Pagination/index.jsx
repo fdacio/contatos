@@ -15,7 +15,7 @@ const Pagination = (props) => {
                     <TouchableOpacity onPress={() => { props.onRefresh() }}>
                         <Icon
                             name="refresh"
-                            size={40}
+                            size={38}
                             color="#ccc"
                         />
 

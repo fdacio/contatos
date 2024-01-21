@@ -49,7 +49,7 @@ const ListContatos = ({ navigation }) => {
 
             }).catch((error) => {
                 if (error.toJSON().message === 'Network Error') {
-                    Alert.alert('Error: Ver conexão com a Internet');
+                    Alert.alert("Erro", "Ver conexão com a internet");
                 }
             }).finally(() => {
                 setIsFreshing(false);
