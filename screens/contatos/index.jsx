@@ -204,6 +204,7 @@ const styles = StyleSheet.create({
         borderBottomColor: '#ccc',
         borderBottomWidth: 1,
         paddingVertical: 8,
+        marginBottom:16
     },
 
     itemContentRow: {
