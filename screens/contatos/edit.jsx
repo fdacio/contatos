@@ -150,7 +150,7 @@ const EditContato = ({ navigation, route }) => {
 
         <SafeAreaView style={styles.container}>
 
-            <Header title="Editar Contato" navigation={navigation} />
+            <Header title="Editar Contato" navigation={navigation} buttonBack={true} />
 
             <Message message={messageSuccess} />
 

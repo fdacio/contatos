@@ -85,7 +85,7 @@ const DeleteGrupo = ({ navigation, route }) => {
     return (
         <SafeAreaView style={styles.container}>
             
-            <Header title="Deletar Grupo" navigation={navigation} />
+            <Header title="Deletar Grupo" navigation={navigation} buttonBack={true} />
 
             <Message message={messageSuccess} ></Message>
             

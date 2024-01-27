@@ -118,7 +118,7 @@ const CreateContato = ({ navigation }) => {
 
         <SafeAreaView style={styles.container}>
 
-            <Header title="Cadastrar Contato" navigation={navigation} />
+            <Header title="Cadastrar Contato" navigation={navigation} buttonBack={true} />
 
             <Message message={messageSuccess} ></Message>
 

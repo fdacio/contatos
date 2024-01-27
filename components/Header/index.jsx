@@ -11,15 +11,32 @@ const Header = (props) => {
         navigation.goBack();
     }
     
+    const onOpenDrawer = () => {
+        const navigation = props.navigation;
+        navigation.openDrawer();
+    }
+
     return (
         <View style={styles.content}>
             <View style={styles.buttonArrow}>
-                {(props.buttonBack == undefined) &&
+                {(props.buttonBack != undefined && props.buttonBack) &&
                     <Button
                         onPress={() => onGoBack()}
                         icon={
                             <Icon
                                 name="arrow-left"
+                                size={20}
+                                color="white" />
+                        }
+                        type="clear"
+                    />
+                }
+                {(props.buttonMenu != undefined && props.buttonMenu) &&
+                    <Button
+                        onPress={() => onOpenDrawer()}
+                        icon={
+                            <Icon
+                                name="bars"
                                 size={20}
                                 color="white" />
                         }

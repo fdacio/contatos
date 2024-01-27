@@ -8,7 +8,8 @@ const Home = ({ navigation }) => {
     return (
         <SafeAreaView style={styles.container}>
 
-            <Header title="Meus Contatos" navigation={navigation} buttonBack={false}/>
+            <Header title="Meus Contatos" navigation={navigation} buttonBack={false} buttonMenu={true} />
+
             <View style={styles.contentImageHome}>
                 <TouchableOpacity style={styles.touchableImageHome}
                     onPress={() => navigation.navigate('MenuContatos')} >

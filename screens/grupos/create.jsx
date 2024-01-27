@@ -71,7 +71,7 @@ const CreateGrupo = ({ navigation }) => {
     return (
         <SafeAreaView style={styles.container}>
 
-            <Header title="Cadastrar Grupo" navigation={navigation} />
+            <Header title="Cadastrar Grupo" navigation={navigation} buttonBack={true} />
 
             <Message message={messageSuccess} ></Message>
 

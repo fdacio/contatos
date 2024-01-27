@@ -41,7 +41,7 @@ const ListGrupos = ({ navigation }) => {
 
     return (
         <SafeAreaView style={styles.container}>
-            <Header title="Grupos" navigation={navigation} buttonsAction={[
+            <Header title="Grupos" navigation={navigation} buttonBack={true}  buttonsAction={[
                 <Button onPress={() => navigation.navigate('CreateGrupo')}
                     icon={
                         <Icon

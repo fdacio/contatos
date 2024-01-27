@@ -85,7 +85,7 @@ const DeleteContato= ({ navigation, route }) => {
 
         <SafeAreaView style={styles.container}>
 
-            <Header title="Deletar Contato" navigation={navigation} />
+            <Header title="Deletar Contato" navigation={navigation} buttonBack={true} />
 
             <Message message={messageSuccess} ></Message>
 

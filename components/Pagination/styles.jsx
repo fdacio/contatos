@@ -3,32 +3,28 @@ import { StyleSheet } from 'react-native';
 const Styles = StyleSheet.create({
     
     content: {
-        padding: 8,
+        padding: 16,
     },
 
     contentButtons: {
         flexDirection: 'row',
     },
 
-    buttonLoad: {
+    contentRefreshButton: {
         flex: 1,
-        alignContent: 'flex-start',
+        justifyContent: 'center',
     },
 
     contentNavigationButton: {
         flex: 2,
         flexDirection: 'row',
-        justifyContent: 'center',
-    },
-
-
-    navigationButton:{
-        paddingHorizontal: 16
+        justifyContent: 'space-between',
     },
 
     textTotalPage: {
         alignSelf: 'center',
         textAlign: 'center',
     }
+
 });
 export default Styles;

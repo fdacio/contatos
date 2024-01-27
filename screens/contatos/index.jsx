@@ -93,7 +93,7 @@ const ListContatos = ({ navigation }) => {
 
         <SafeAreaView style={styles.container}>
 
-            <Header title="Contatos" navigation={navigation} buttonsAction={[
+            <Header title="Contatos" navigation={navigation} buttonBack={true} buttonsAction={[
 
                 <Button onPress={() => navigation.navigate('CreateContato')}
                     icon={
@@ -161,7 +161,11 @@ const ListContatos = ({ navigation }) => {
 
             <Loading loading={isFreshing} />
 
-            <Pagination totalRegistros={totalRegistros} onRefresh={onRefreshPages} actions={[
+            <Pagination totalRegistros={totalRegistros}  actions={[
+                {
+                    'key': 'rf',
+                    'action' : onRefreshPages
+                },
                 {
                     'key': 'fp',
                     'action': onFirstPage

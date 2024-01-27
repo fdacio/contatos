@@ -11,35 +11,46 @@ const Pagination = (props) => {
     return (
         <View style={styles.content}>
             <View style={styles.contentButtons}>
-                <View style={styles.buttonLoad}>
-                    <TouchableOpacity onPress={() => { props.onRefresh() }}>
-                        <Icon
-                            name="refresh"
-                            size={32}
-                            color="#ccc"
-                        />
+                <View style={styles.contentRefreshButton}>
+                    {(props.actions != undefined) && props.actions.filter((action) => action.key == 'rf').map((action) =>
 
-                    </TouchableOpacity>
+                   
+                        <View key={action.key} >
+                            <TouchableOpacity onPress={() => { action.action() }}>
+                                <Icon
+                                    name="refresh"
+                                    size={28}
+                                    color="#ccc"
+                                />
+                            </TouchableOpacity>
+                        </View>
+
+                    )}
                 </View>
                 <View style={styles.contentNavigationButton}>
-                    {(props.actions != undefined) && props.actions.map((action, index) =>
-                        <View key={index}>
-                            <TouchableOpacity onPress={() => { action.action() }} style={styles.navigationButton}>
+                    {(props.actions != undefined) && props.actions.filter((action) => action.key !== 'rf').map((action) =>
+                       
+                        <View key={action.key} >
+                            <TouchableOpacity onPress={() => { action.action() }} >
 
                                 {(action.key === 'fp') &&
                                     <Icon
                                         name="angle-double-left"
                                         size={40}
                                         color="#ccc"
+
                                     />
                                 }
+
                                 {(action.key === 'pp') &&
                                     <Icon
                                         name="angle-left"
                                         size={40}
                                         color="#ccc"
+
                                     />
                                 }
+
                                 {(action.key === 'np') &&
                                     <Icon
                                         name="angle-right"
@@ -47,6 +58,7 @@ const Pagination = (props) => {
                                         color="#ccc"
                                     />
                                 }
+
                                 {(action.key === 'lp') &&
                                     <Icon
                                         name="angle-double-right"
@@ -56,9 +68,9 @@ const Pagination = (props) => {
                                 }
                             </TouchableOpacity>
                         </View>
-                    )}
+                    )} 
                 </View>
-                <View style={{flex: 1}}></View>                
+                <View style={{ flex: 1 }}></View>
             </View>
             <View>
                 <Text style={styles.textTotalPage}>Total de Registros:{props.totalRegistros}</Text>
