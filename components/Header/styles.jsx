@@ -6,26 +6,26 @@ const Styles = StyleSheet.create({
         flexDirection: 'row',
         backgroundColor: '#201f1f',
         height: 56,
-        paddingHorizontal: 8
+        paddingHorizontal: 4
     },
 
-    buttonArrow: {
+    buttonLeft: {
         flex: 1,
         alignItems: 'flex-start',
         alignSelf: 'center',
     },
 
     title: {
+        flex: 4,
         fontSize: 18,
         fontWeight: 'bold',
         color: 'white',
         alignSelf: 'center',
         textAlign: 'center',
-        flex: 4,
         flexWrap: 'nowrap',
     },
 
-    buttonAction: {
+    buttonRight: {
         flex: 1,
         flexDirection: 'row',
         justifyContent: 'flex-end',

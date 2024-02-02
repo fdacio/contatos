@@ -18,7 +18,7 @@ const Header = (props) => {
 
     return (
         <View style={styles.content}>
-            <View style={styles.buttonArrow}>
+            <View style={styles.buttonLeft}>
                 {(props.buttonBack != undefined && props.buttonBack) &&
                     <Button
                         onPress={() => onGoBack()}
@@ -46,7 +46,7 @@ const Header = (props) => {
             </View>
             <Text style={styles.title}>{props.title}</Text>
 
-            <View style={styles.buttonAction}>
+            <View style={styles.buttonRight}>
                 {(props.buttonsAction != undefined) && props.buttonsAction.map((component) => component)}
             </View>
 
