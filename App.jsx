@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { StatusBar, BackHandler, Alert, View } from 'react-native';
+import { StatusBar, BackHandler, Alert } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import DrawerMenu from './screens/DrawerMenu';
 

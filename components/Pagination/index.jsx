@@ -1,26 +1,24 @@
-import React from 'react';
+import React, { useEffect, useState}  from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import styles from './styles';
 
 const Pagination = (props) => {
 
+    const [totalRegistros, setTotalRegistros] = useState(0);
+    const [totalPaginas, setTotalPaginas] = useState(0);
+    const [paginaAtual, setPaginaAtual] = useState(0);
+
+    useEffect(() => {
+        setTotalRegistros((props.totalRegistros != undefined) ? props.totalRegistros : 0);
+        setTotalPaginas((props.totalPaginas != undefined) ? props.totalPaginas : 0 );
+        setPaginaAtual((props.paginaAtual != undefined) ? props.paginaAtual : 0);
+    })
+
     return (
         <View style={styles.content}>
             <View style={styles.contentButtons}>
-                <View style={styles.contentRefreshButton}>
-                    {(props.actions != undefined) && props.actions.filter((action) => action.key == 'rf').map((action) =>
-                        <View key={action.key} >
-                            <TouchableOpacity onPress={() => { action.action() }}>
-                                <Icon
-                                    name="refresh"
-                                    size={28}
-                                    color="#ccc"
-                                />
-                            </TouchableOpacity>
-                        </View>
-                    )}
-                </View>
+                <View style={{ flex: 1 }} />
                 <View style={styles.contentNavigationButton}>
                     {(props.actions != undefined) && props.actions.filter((action) => action.key !== 'rf').map((action) =>
                        
@@ -63,8 +61,8 @@ const Pagination = (props) => {
                 <View style={{ flex: 1 }} />
             </View>
             <View style={styles.contentTotal}>
-                <Text>Total:{props.totalRegistros}</Text>
-                <Text>Pagina:{props.paginaAtual + "/" + props.totalPaginas}</Text>
+                <Text>Total:{totalRegistros}</Text>
+                <Text>Pagina:{paginaAtual + "/" + totalPaginas}</Text>
             </View>
         </View>
     )

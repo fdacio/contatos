@@ -33,7 +33,7 @@ const Styles = StyleSheet.create({
     },
 
     button: {
-        padding: 12,
+        padding: 8,
     }
 });
 

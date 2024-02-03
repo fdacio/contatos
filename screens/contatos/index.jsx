@@ -7,6 +7,7 @@ import Pagination from '../../components/Pagination';
 import axios from 'axios';
 
 import FormSearchContatos from './search';
+import FloatButton from '../../components/FloatButton';
 
 const ListContatos = ({ navigation }) => {
 
@@ -84,9 +85,6 @@ const ListContatos = ({ navigation }) => {
     const onLastPage = () => {
         onLoadList(urlLastPage);
     }
-    const onRefreshPages = () => {
-        onLoadList(urlDefault);
-    } 
 
     useEffect(() => {
         const unsubscribe = navigation.addListener('focus', async () => {
@@ -116,7 +114,7 @@ const ListContatos = ({ navigation }) => {
 
             {formSearch}
 
-            <FlatList style={{ padding: 16 }}
+            <FlatList style={styles.flatList}
                 ref={flatListRef}
                 data={contatos}
                 refreshing={isFreshing}
@@ -136,7 +134,6 @@ const ListContatos = ({ navigation }) => {
                                         "route" : "DeleteContato",
                                         "id" : item.id,
                                         "iconName" : "trash"
-
                                     },
                                 ]}/>
                             </View>
@@ -152,32 +149,33 @@ const ListContatos = ({ navigation }) => {
                     </View>
                     
                 }
-                ListFooterComponent={(totalRegistros > 0) &&
-                <Pagination totalRegistros={totalRegistros}  totalPaginas={totalPaginas} paginaAtual={paginaAtual} actions={[
-                    {
-                        'key': 'rf',
-                        'action' : onRefreshPages
-                    },
-                    {
-                        'key': 'fp',
-                        'action': onFirstPage
-                    },
-                    {
-                        'key': 'pp',
-                        'action': onPreviorPage
-                    },
-                    {
-                        'key': 'np',
-                        'action': onNextPage
-                    },
-                    {
-                        'key': 'lp',
-                        'action': onLastPage
-                    },
-                ]}/>}
+
+                ListFooterComponent={(totalRegistros > 0) && <View><Text></Text></View>}
+
             />
             
-            <Loading loading={isFreshing} />
+            <FloatButton iconName="refresh" onPress={() => onLoadList(urlDefault)} style={{bottom: 64}}/>
+
+            <Pagination totalRegistros={totalRegistros} totalPaginas={totalPaginas} paginaAtual={paginaAtual} actions={[
+                        {
+                            'key': 'fp',
+                            'action': onFirstPage
+                        },
+                        {
+                            'key': 'pp',
+                            'action': onPreviorPage
+                        },
+                        {
+                            'key': 'np',
+                            'action': onNextPage
+                        },
+                        {
+                            'key': 'lp',
+                            'action': onLastPage
+                        },
+                ]}/>
+
+             <Loading loading={isFreshing} />
         
         </SafeAreaView>
 
@@ -189,6 +187,10 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#fff',
+    },
+
+    flatList: {
+        padding: 16
     },
 
     itemContent: {

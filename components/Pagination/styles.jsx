@@ -3,18 +3,13 @@ import { StyleSheet } from 'react-native';
 const Styles = StyleSheet.create({
     
     content: {
-        paddingVertical: 8,
-        marginBottom: 16
+        padding: 8,
+        marginBottom: 8
     },
 
     contentButtons: {
         flexDirection: 'row',
         marginBottom: 8,
-    },
-
-    contentRefreshButton: {
-        flex: 1,
-        justifyContent: 'center',
     },
 
     contentNavigationButton: {
