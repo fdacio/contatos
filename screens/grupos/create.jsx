@@ -60,9 +60,9 @@ const CreateGrupo = ({ navigation }) => {
                 }
             })
             .finally(function () {
-                setDisabledButton(false);
-                setLabelButton(labelBotao);
-                setLoading(false);
+                //setDisabledButton(false);
+                //setLabelButton(labelBotao);
+                //setLoading(false);
             });
 
     }

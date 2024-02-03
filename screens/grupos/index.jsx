@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, SafeAreaView, FlatList, View, Text, Alert, TouchableOpacity } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
-import { Button } from 'react-native-elements';
+import ButtonListItem from '../../components/ButtonListItem';
 import axios from 'axios';
 import Header from '../../components/Header';
 import Loading from '../../components/Loading';
@@ -31,6 +30,9 @@ const ListGrupos = ({ navigation }) => {
             });
     }
 
+    const onCreateGrupo = () => {
+        navigation.navigate('CreateGrupo');
+    }
     useEffect(() => {
         const unsubscribe = navigation.addListener('focus', async () => {
             onLoadList();
@@ -42,16 +44,11 @@ const ListGrupos = ({ navigation }) => {
     return (
         <SafeAreaView style={styles.container}>
             <Header title="Grupos" navigation={navigation} buttonBack={true}  buttonsAction={[
-                <Button onPress={() => navigation.navigate('CreateGrupo')}
-                    icon={
-                        <Icon
-                            name="plus"
-                            size={20}
-                            color="#fff" />
-                    }
-                    type="clear"
-                    key="0"
-                />]}
+                {
+                    "action" : onCreateGrupo,
+                    "iconName" : "plus" 
+                }
+            ]}
             ></Header>
 
             <FlatList style={{ padding: 16 }}
@@ -65,22 +62,19 @@ const ListGrupos = ({ navigation }) => {
                         <View>
                             <Text style={styles.itemName}>{item.nome}</Text>
                         </View>
-                        <View style={styles.groupButton} >
-                            <TouchableOpacity onPress={() => navigation.navigate('DeleteGrupo', { id: item.id })} style={styles.actionButton}>
-                                <Icon
-                                    name="trash"
-                                    size={32}
-                                    color="#ccc"
-                                />
-                            </TouchableOpacity>
-                            <TouchableOpacity onPress={() => navigation.navigate('EditGrupo', { id: item.id })} style={styles.actionButton}>
-                                <Icon
-                                    name="edit"
-                                    size={32}
-                                    color="#ccc"
-                                />
-                            </TouchableOpacity>
-                        </View>
+                        <ButtonListItem navigation={navigation} buttonsAction={[
+                                    {
+                                        "route" : "EditGrupo",
+                                        "id" : item.id,
+                                        "iconName" : "edit"
+                                    },
+                                    {
+                                        "route" : "DeleteGrupo",
+                                        "id" : item.id,
+                                        "iconName" : "trash"
+
+                                    },
+                                ]}/>
 
                     </View>
                 }

@@ -10,8 +10,6 @@ const Pagination = (props) => {
             <View style={styles.contentButtons}>
                 <View style={styles.contentRefreshButton}>
                     {(props.actions != undefined) && props.actions.filter((action) => action.key == 'rf').map((action) =>
-
-                   
                         <View key={action.key} >
                             <TouchableOpacity onPress={() => { action.action() }}>
                                 <Icon
@@ -21,7 +19,6 @@ const Pagination = (props) => {
                                 />
                             </TouchableOpacity>
                         </View>
-
                     )}
                 </View>
                 <View style={styles.contentNavigationButton}>
@@ -29,7 +26,6 @@ const Pagination = (props) => {
                        
                         <View key={action.key} >
                             <TouchableOpacity onPress={() => { action.action() }} >
-
                                 {(action.key === 'fp') &&
                                     <Icon
                                         name="angle-double-left"
@@ -38,7 +34,6 @@ const Pagination = (props) => {
 
                                     />
                                 }
-
                                 {(action.key === 'pp') &&
                                     <Icon
                                         name="angle-left"
@@ -47,7 +42,6 @@ const Pagination = (props) => {
 
                                     />
                                 }
-
                                 {(action.key === 'np') &&
                                     <Icon
                                         name="angle-right"
@@ -55,7 +49,6 @@ const Pagination = (props) => {
                                         color="#ccc"
                                     />
                                 }
-
                                 {(action.key === 'lp') &&
                                     <Icon
                                         name="angle-double-right"
@@ -67,10 +60,11 @@ const Pagination = (props) => {
                         </View>
                     )} 
                 </View>
-                <View style={{ flex: 1 }}></View>
+                <View style={{ flex: 1 }} />
             </View>
-            <View>
-                <Text style={styles.textTotalPage}>Total de Registros:{props.totalRegistros}</Text>
+            <View style={styles.contentTotal}>
+                <Text>Total:{props.totalRegistros}</Text>
+                <Text>Pagina:{props.paginaAtual + "/" + props.totalPaginas}</Text>
             </View>
         </View>
     )

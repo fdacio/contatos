@@ -1,7 +1,6 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { Button } from 'react-native-elements';
 import styles from './styles';
 
 const Header = (props) => {
@@ -10,7 +9,7 @@ const Header = (props) => {
         const navigation = props.navigation;
         navigation.goBack();
     }
-    
+
     const onOpenDrawer = () => {
         const navigation = props.navigation;
         navigation.openDrawer();
@@ -20,34 +19,37 @@ const Header = (props) => {
         <View style={styles.content}>
             <View style={styles.buttonLeft}>
                 {(props.buttonBack != undefined && props.buttonBack) &&
-                    <Button
-                        onPress={() => onGoBack()}
-                        icon={
-                            <Icon
-                                name="arrow-left"
-                                size={20}
-                                color="white" />
-                        }
-                        type="clear"
-                    />
+                    <TouchableOpacity style={styles.button}
+                        onPress={() => onGoBack()}>
+                        <Icon
+                            name="arrow-left"
+                            size={20}
+                            color="white" />
+                    </TouchableOpacity>
                 }
                 {(props.buttonMenu != undefined && props.buttonMenu) &&
-                    <Button
-                        onPress={() => onOpenDrawer()}
-                        icon={
-                            <Icon
-                                name="bars"
-                                size={20}
-                                color="white" />
-                        }
-                        type="clear"
-                    />
+                    <TouchableOpacity style={styles.button}
+                        onPress={() => onOpenDrawer()}>
+                        <Icon
+                            name="bars"
+                            size={20}
+                            color="white" />
+                    </TouchableOpacity>
                 }
             </View>
+
             <Text style={styles.title}>{props.title}</Text>
 
             <View style={styles.buttonRight}>
-                {(props.buttonsAction != undefined) && props.buttonsAction.map((component) => component)}
+                {(props.buttonsAction != undefined) && props.buttonsAction.map((button, index) =>
+                    <TouchableOpacity style={styles.button} key={index}
+                        onPress={() => button.action()}>
+                        <Icon
+                            name={button.iconName}
+                            size={20}
+                            color="white" />
+                    </TouchableOpacity>
+                )}
             </View>
 
 

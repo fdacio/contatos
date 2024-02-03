@@ -89,9 +89,9 @@ const EditGrupo = ({ navigation, route }) => {
                 }
             })
             .finally(function () {
-                setDisabledButton(false);
-                setLabelButton(labelBotao);
-                setLoading(false);
+                //setDisabledButton(false);
+                //setLabelButton(labelBotao);
+                //setLoading(false);
             });
 
     }

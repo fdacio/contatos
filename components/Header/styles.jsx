@@ -30,6 +30,10 @@ const Styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'flex-end',
         alignSelf: 'center',
+    },
+
+    button: {
+        padding: 12,
     }
 });
 

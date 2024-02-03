@@ -1,11 +1,10 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { FlatList, StyleSheet, SafeAreaView, View, Text, Alert, TouchableOpacity } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
-import { Button } from 'react-native-elements';
-import axios from 'axios';
+import ButtonListItem from '../../components/ButtonListItem';
 import Header from '../../components/Header';
 import Loading from '../../components/Loading';
 import Pagination from '../../components/Pagination';
+import axios from 'axios';
 
 import FormSearchContatos from './search';
 
@@ -13,10 +12,13 @@ const ListContatos = ({ navigation }) => {
 
     const flatListRef = useRef()
     const [contatos, setContatos] = useState([]);
-    const [totalRegistros, setTotalRegistros] = useState();
     const [isFreshing, setIsFreshing] = useState(false);
     const [formSearch, setFormSearch] = useState();
     const [visibleFormSearch, setVisibleFormSearch] = useState(false);
+
+    const [totalRegistros, setTotalRegistros] = useState();
+    const [totalPaginas, setTotalPaginas] = useState();
+    const [paginaAtual, setPaginaAtual] = useState();
     const [urlFirstPage, setUrlFirstPage] = useState();
     const [urlPreviorPage, setUrlPreviorPage] = useState();
     const [urlNextPage, setUrlNextPage] = useState();
@@ -33,12 +35,13 @@ const ListContatos = ({ navigation }) => {
 
         console.log("URL Get: " + url);
 
-
         await axios.get(url)
             .then((response) => {
                 if (response.status == 200) {
                     setContatos(response.data.data);
                     setTotalRegistros(response.data.total);
+                    setTotalPaginas(response.data.last_page);
+                    setPaginaAtual(response.data.current_page);
                     setUrlFirstPage((response.data.first_page_url != null) ? response.data.first_page_url : url);
                     setUrlPreviorPage((response.data.prev_page_url != null) ? response.data.prev_page_url : url);
                     setUrlNextPage((response.data.next_page_url != null) ? response.data.next_page_url : url)
@@ -54,6 +57,10 @@ const ListContatos = ({ navigation }) => {
             }).finally(() => {
                 setIsFreshing(false);
             });
+    }
+
+    const onCreateContato = () => {
+        navigation.navigate('CreateContato');
     }
 
     const onFormSearch = () => {
@@ -94,27 +101,15 @@ const ListContatos = ({ navigation }) => {
         <SafeAreaView style={styles.container}>
 
             <Header title="Contatos" navigation={navigation} buttonBack={true} buttonsAction={[
+                {
+                    "action" : onCreateContato,
+                    "iconName" : "plus"
+                },
+                {
+                    "action" : onFormSearch,
+                    "iconName" : "search"
 
-                <Button onPress={() => navigation.navigate('CreateContato')}
-                    icon={
-                        <Icon
-                            name="plus"
-                            size={20}
-                            color="#fff" />
-                    }
-                    type="clear"
-                    key="0"
-                />,
-                <Button onPress={() => onFormSearch()}
-                    icon={
-                        <Icon
-                            name="search"
-                            size={20}
-                            color="#fff" />
-                    }
-                    type="clear"
-                    key="1"
-                />
+                },
             ]
             }>
             </Header>
@@ -131,20 +126,19 @@ const ListContatos = ({ navigation }) => {
                         <View style={styles.itemContentRow}>
                             <Text style={styles.textItemName}>{item.nome}</Text>
                             <View style={styles.groupButton} >
-                                <TouchableOpacity onPress={() => navigation.navigate('DeleteContato', { id: item.id })} style={styles.actionButton}>
-                                    <Icon
-                                        name="trash"
-                                        size={32}
-                                        color="#ccc"
-                                    />
-                                </TouchableOpacity>
-                                <TouchableOpacity onPress={() => navigation.navigate('EditContato', { id: item.id })} style={styles.actionButton}>
-                                    <Icon
-                                        name="edit"
-                                        size={32}
-                                        color="#ccc"
-                                    />
-                                </TouchableOpacity>
+                                <ButtonListItem navigation={navigation} buttonsAction={[
+                                    {
+                                        "route" : "EditContato",
+                                        "id" : item.id,
+                                        "iconName" : "edit"
+                                    },
+                                    {
+                                        "route" : "DeleteContato",
+                                        "id" : item.id,
+                                        "iconName" : "trash"
+
+                                    },
+                                ]}/>
                             </View>
                         </View>
                         <View>
@@ -156,34 +150,35 @@ const ListContatos = ({ navigation }) => {
                             </View>
                         </View>
                     </View>
+                    
                 }
+                ListFooterComponent={(totalRegistros > 0) &&
+                <Pagination totalRegistros={totalRegistros}  totalPaginas={totalPaginas} paginaAtual={paginaAtual} actions={[
+                    {
+                        'key': 'rf',
+                        'action' : onRefreshPages
+                    },
+                    {
+                        'key': 'fp',
+                        'action': onFirstPage
+                    },
+                    {
+                        'key': 'pp',
+                        'action': onPreviorPage
+                    },
+                    {
+                        'key': 'np',
+                        'action': onNextPage
+                    },
+                    {
+                        'key': 'lp',
+                        'action': onLastPage
+                    },
+                ]}/>}
             />
-
+            
             <Loading loading={isFreshing} />
-
-            <Pagination totalRegistros={totalRegistros}  actions={[
-                {
-                    'key': 'rf',
-                    'action' : onRefreshPages
-                },
-                {
-                    'key': 'fp',
-                    'action': onFirstPage
-                },
-                {
-                    'key': 'pp',
-                    'action': onPreviorPage
-                },
-                {
-                    'key': 'np',
-                    'action': onNextPage
-                },
-                {
-                    'key': 'lp',
-                    'action': onLastPage
-                },
-            ]}></Pagination>
-
+        
         </SafeAreaView>
 
     )
@@ -196,19 +191,10 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
     },
 
-    buttonAction: {
-        flex: 1,
-        flexDirection: 'row',
-        alignItems: 'flex-end',
-        alignSelf: 'center',
-        justifyContent: 'space-between',
-    },
-
     itemContent: {
+        paddingVertical: 8,
         borderBottomColor: '#ccc',
         borderBottomWidth: 1,
-        paddingVertical: 8,
-        marginBottom:16
     },
 
     itemContentRow: {
@@ -233,16 +219,6 @@ const styles = StyleSheet.create({
         height: 25,
         color: '#ccc'
     },
-
-
-    groupButton: {
-        flexDirection: 'row',
-    },
-
-    actionButton: {
-        marginLeft: 10
-    }
-
 });
 
 export default ListContatos;

@@ -3,11 +3,13 @@ import { StyleSheet } from 'react-native';
 const Styles = StyleSheet.create({
     
     content: {
-        padding: 16,
+        paddingVertical: 8,
+        marginBottom: 16
     },
 
     contentButtons: {
         flexDirection: 'row',
+        marginBottom: 8,
     },
 
     contentRefreshButton: {
@@ -21,9 +23,9 @@ const Styles = StyleSheet.create({
         justifyContent: 'space-between',
     },
 
-    textTotalPage: {
-        alignSelf: 'center',
-        textAlign: 'center',
+    contentTotal: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
     }
 
 });

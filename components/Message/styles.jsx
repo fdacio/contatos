@@ -28,6 +28,7 @@ const Styles = StyleSheet.create({
         alignItems: 'flex-end',
         alignSelf: 'flex-start',
         width: 2,
+        display: 'none'
     },
 
     messageInvisible: {

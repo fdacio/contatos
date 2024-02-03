@@ -4,7 +4,7 @@ import styles from './styles';
 
 const Loading = (props) => {
     return (
-        <View style={[styles.container, styles.horizontal]}>
+        <View style={styles.container}>
             {props.loading && <ActivityIndicator color="#a37522" size={80} />}
         </View>
     );
