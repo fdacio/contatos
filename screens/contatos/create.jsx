@@ -77,6 +77,7 @@ const CreateContato = ({ navigation }) => {
             .then((response) => {
                 if (response.status == 201) {
                     setMessageSuccess("Registro cadastrado com sucesso");
+                    setLoading(true);
                     const toRef = setTimeout(() => {
                         navigation.goBack();
                         clearTimeout(toRef);
@@ -107,9 +108,9 @@ const CreateContato = ({ navigation }) => {
                 }
             })
             .finally(function () {
-                //setDisabledButton(false);
-                //setLabelButton(labelBotao);
-                //setLoading(false);
+                setDisabledButton(false);
+                setLabelButton(labelBotao);
+                setLoading(false);
             });
 
     }

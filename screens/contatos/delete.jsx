@@ -59,6 +59,7 @@ const DeleteContato= ({ navigation, route }) => {
             .then((response) => {
                 if (response.status == 204) {
                     setMessageSuccess("Registro excluído com succeso");
+                    setLoading(true);
                     const toRef = setTimeout(() => {
                         navigation.goBack();
                         clearTimeout(toRef);
@@ -74,9 +75,9 @@ const DeleteContato= ({ navigation, route }) => {
                 }
             })
             .finally(function () {
-                //setDisabledButton(false);
-                //setLabelButton(labelBotao);
-                //setLoading(false);
+                setDisabledButton(false);
+                setLabelButton(labelBotao);
+                setLoading(false);
             });
 
     }

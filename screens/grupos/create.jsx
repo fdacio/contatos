@@ -39,6 +39,7 @@ const CreateGrupo = ({ navigation }) => {
             .then((response) => {
                 if (response.status == 201) {
                     setMessageSuccess("Registro cadastrado com sucesso");
+                    setLoading(true);
                     const toRef = setTimeout(() => {
                         navigation.goBack();
                         clearTimeout(toRef);
@@ -60,13 +61,12 @@ const CreateGrupo = ({ navigation }) => {
                 }
             })
             .finally(function () {
-                //setDisabledButton(false);
-                //setLabelButton(labelBotao);
-                //setLoading(false);
+                setDisabledButton(false);
+                setLabelButton(labelBotao);
+                setLoading(false);
             });
 
     }
-
 
     return (
         <SafeAreaView style={styles.container}>
