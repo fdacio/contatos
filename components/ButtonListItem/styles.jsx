@@ -5,8 +5,14 @@ const styles = StyleSheet.create({
     content: {
         flexDirection: 'row',
     },
+
     button: {
-        marginLeft: 16
+        padding: 8,
+        width: 40,
+        height: 40,
+        alignItems: 'center',
+        borderWidth: 0,
+        borderColor: '#000'
     }
 });
 

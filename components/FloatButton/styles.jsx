@@ -11,7 +11,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         position: 'absolute',
         bottom: 8,
-        right:8
+        right:8,
+        zIndex: 1000
     }
     
 

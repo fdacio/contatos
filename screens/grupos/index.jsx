@@ -78,6 +78,8 @@ const ListGrupos = ({ navigation }) => {
 
                     </View>
                 }
+                ItemSeparatorComponent = {<View style={styles.itemSeparator}></View> }
+                ListFooterComponent={<View><Text></Text></View>}
             />
 
             <Loading loading={isFreshing} />
@@ -108,10 +110,13 @@ const styles = StyleSheet.create({
     itemContent: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        borderBottomColor: '#ccc',
-        borderBottomWidth: 1,
         paddingVertical: 16,
         flexWrap: 'wrap'
+    },
+
+    itemSeparator: {
+        borderBottomColor: '#ccc',
+        borderBottomWidth: 1,
     },
 
     groupButton: {

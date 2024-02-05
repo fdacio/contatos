@@ -149,8 +149,9 @@ const ListContatos = ({ navigation }) => {
                     </View>
                     
                 }
-
-                ListFooterComponent={(totalRegistros > 0) && <View><Text></Text></View>}
+                
+                ItemSeparatorComponent = {<View style={styles.itemSeparator}></View> }
+                ListFooterComponent={<View><Text></Text></View>}
 
             />
             
@@ -195,13 +196,16 @@ const styles = StyleSheet.create({
 
     itemContent: {
         paddingVertical: 8,
-        borderBottomColor: '#ccc',
-        borderBottomWidth: 1,
     },
 
     itemContentRow: {
         flexDirection: 'row',
         justifyContent: 'space-between'
+    },
+
+    itemSeparator: {
+        borderBottomColor: '#ccc',
+        borderBottomWidth: 1,
     },
 
     textItemName: {

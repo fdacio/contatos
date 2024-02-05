@@ -4,7 +4,9 @@ const Styles = StyleSheet.create({
     
     content: {
         padding: 8,
-        marginBottom: 8
+        marginBottom: 8,
+        borderTopWidth: 1,
+        borderColor: '#ccc'
     },
 
     contentButtons: {

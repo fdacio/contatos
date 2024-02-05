@@ -6,7 +6,7 @@ const Styles = StyleSheet.create({
         flexDirection: 'row',
         backgroundColor: '#201f1f',
         height: 56,
-        paddingHorizontal: 4
+        paddingHorizontal: 8
     },
 
     buttonLeft: {
@@ -34,6 +34,8 @@ const Styles = StyleSheet.create({
 
     button: {
         padding: 8,
+        borderWidth: 0,
+        borderColor: '#fff'
     }
 });
 
