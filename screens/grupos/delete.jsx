@@ -8,7 +8,7 @@ import Message from '../../components/Message';
 
 const DeleteGrupo = ({ navigation, route }) => {
 
-    const [grupo, setGrupo] = useState([]);
+    const [grupo, setGrupo] = useState({});
     const [messageSuccess, setMessageSuccess] = useState('');
     const [messageError, setMessageError] = useState('');
     const [disabledButton, setDisabledButton] = useState(false);

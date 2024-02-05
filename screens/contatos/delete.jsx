@@ -8,7 +8,7 @@ import Message from '../../components/Message';
 
 const DeleteContato= ({ navigation, route }) => {
 
-    const [contato, setContato] = useState([]);
+    const [contato, setContato] = useState();
     const [messageSuccess, setMessageSuccess] = useState('');
     const [messageError, setMessageError] = useState('');
     const [disabledButton, setDisabledButton] = useState(false);
@@ -91,13 +91,14 @@ const DeleteContato= ({ navigation, route }) => {
             <Message message={messageSuccess} ></Message>
 
             <View style={{ padding: 16 }} >
-
+                {(contato != undefined) &&
                 <View style={styles.contentDados}>
-                    <Text style={styles.itemName}>{contato.nome}</Text>
-                    <Text style={styles.itemEmail}>{contato.email}</Text>
-                    <Text style={styles.itemTelefone}>{contato.telefone}</Text>
+                    <Text style={styles.textDadoName}>{contato.nome}</Text>
+                    <Text style={styles.textDado}>{contato.email}</Text>
+                    <Text style={styles.textDado}>{contato.telefone}</Text>
+                    <Text style={styles.textDado}>{contato.grupo.nome}</Text>
                 </View>
-
+                }
                 <View style={styles.bottomPosition}>
                     <Button label={labelButton} onPress={onDelete} disabled={disabledButton} style={styles.buttonDelete} />
                 </View>
@@ -125,18 +126,13 @@ const styles = StyleSheet.create({
         borderRadius: 4,
     },
 
-    itemName: {
+    textDadoName: {
         fontSize: 18,
         height: 35,
         fontWeight: 'bold'
     },
 
-    itemEmail: {
-        fontSize: 16,
-        height: 25
-    },
-
-    itemTelefone: {
+    textDado: {
         fontSize: 16,
         height: 25
     },
