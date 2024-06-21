@@ -1,13 +1,13 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { FlatList, StyleSheet, SafeAreaView, View, Text, Alert, TouchableOpacity } from 'react-native';
+import { FlatList, StyleSheet, SafeAreaView, View, Text, Alert } from 'react-native';
+import axios from 'axios';
 import ButtonListItem from '../../components/ButtonListItem';
 import Header from '../../components/Header';
 import Loading from '../../components/Loading';
 import Pagination from '../../components/Pagination';
-import axios from 'axios';
-
-import FormSearchContatos from './search';
 import FloatButton from '../../components/FloatButton';
+import FormSearchContatos from './search';
+
 
 const ListContatos = ({ navigation }) => {
 
@@ -25,8 +25,8 @@ const ListContatos = ({ navigation }) => {
     const [urlNextPage, setUrlNextPage] = useState();
     const [urlLastPage, setUrlLastPage] = useState();
 
-    const [sizePage, setSizePage] = useState(20);
-    const [urlDefault, setUrlDefault] = useState(`https://contatos.daciosoftware.com.br/api/contatos/pageable?page=1&size=${sizePage}`);
+    const sizePage = 20;
+    const urlDefault = `https://contatos.daciosoftware.com.br/api/contatos/pageable?page=1&size=${sizePage}`;
 
 
     const onLoadList = async (url) => {

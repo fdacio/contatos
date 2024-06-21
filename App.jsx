@@ -4,10 +4,12 @@ import { NavigationContainer } from '@react-navigation/native';
 import DrawerMenu from './screens/DrawerMenu';
 
 
-const App = () => {
+const App = ({ navigation }) => {
 
     useEffect(() => {
         const backAction = () => {
+
+            
             Alert.alert("Contatos", "Deseja sair da aplicação?", [
                 {
                     text: "Não",
@@ -16,6 +18,7 @@ const App = () => {
                 },
                 { text: "Sim", onPress: () => BackHandler.exitApp() }
             ]);
+            
             return true;
         };
 
