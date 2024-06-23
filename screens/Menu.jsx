@@ -3,6 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import DrawerMenu from './DrawerMenu';
 
+
 const Stack = createStackNavigator();
 
 const Menu = () => {
@@ -14,6 +15,7 @@ const Menu = () => {
                     component={DrawerMenu}
                     options={{ headerShown: false }}
                 />
+
             </Stack.Navigator>
         </NavigationContainer>
 

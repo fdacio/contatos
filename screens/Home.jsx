@@ -3,11 +3,21 @@ import { StyleSheet, SafeAreaView, TouchableOpacity, View, Image } from 'react-n
 import Header from '../components/Header';
 import Logo from '../assets/home.png'
 
+
 const Home = ({ navigation }) => {
+
+    const onLogin = () => {
+        navigation.navigate("Login");
+    }
 
     return (
         <SafeAreaView style={styles.container}>
-            <Header title="Meus Contatos" navigation={navigation} buttonBack={false} buttonMenu={true} />
+            <Header title="Meus Contatos" navigation={navigation} buttonBack={false} buttonMenu={true} linksAction={[
+                {
+                    "action" : onLogin,
+                    "text" : "Login"
+                },
+            ]}/>
             <View style={styles.contentImageHome}>
                 <TouchableOpacity style={styles.touchableImageHome}
                     onPress={() => navigation.navigate('MenuContatos')} >

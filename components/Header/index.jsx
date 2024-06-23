@@ -50,6 +50,9 @@ const Header = (props) => {
                             color="white" />
                     </TouchableOpacity>
                 )}
+                {(props.linksAction != undefined) && props.linksAction.map((link, index) =>
+                    <Text style={styles.link} onPress={()=>link.action()} key={index}>{link.text}</Text>
+                )}
             </View>
 
 

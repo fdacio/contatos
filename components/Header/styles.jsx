@@ -25,6 +25,13 @@ const Styles = StyleSheet.create({
         flexWrap: 'nowrap',
     },
 
+    link: {
+        fontSize: 14,
+        fontWeight: 'bold',
+        color: 'white',
+    },
+
+
     buttonRight: {
         flex: 1,
         flexDirection: 'row',
