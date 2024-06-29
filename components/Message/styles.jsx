@@ -9,7 +9,6 @@ const Styles = StyleSheet.create({
         padding: 8,
         borderRadius: 4,
         borderColor: '#c3e6cb',
-        marginHorizontal: 8,
         marginVertical: 4
     },
 
@@ -27,8 +26,7 @@ const Styles = StyleSheet.create({
         flex: 1,
         alignItems: 'flex-end',
         alignSelf: 'flex-start',
-        width: 2,
-        display: 'none'
+        width: 2
     },
 
     messageInvisible: {
