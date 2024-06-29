@@ -5,10 +5,18 @@ const styles = StyleSheet.create({
     button: {
         width: '100%',
         height: 50,
-        backgroundColor: '#201f1f',
+
         alignItems: 'center',
         justifyContent: 'center',
         borderRadius: 4
+    },
+
+    buttonEnable: {
+        backgroundColor: '#201f1f',
+    },
+
+    buttonDisabled: {
+        backgroundColor: '#d6d6d6',
     },
 
     textButton: {

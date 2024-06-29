@@ -4,6 +4,7 @@ import Header from '../../components/Header';
 import axios from 'axios';
 import Button from '../../components/Button';
 import TextInputLabel from '../../components/TextInputLabel';
+import TextAreaLabel from '../../components/TextAreaLabel';
 import Loading from '../../components/Loading';
 
 
@@ -25,7 +26,7 @@ const Login = ({navigation}) => {
         setLabelButton("Aguarde...");
         setLoading(true);
 
-        const url = 'http://159.203.24.33:8083/siga/auth/usuario';
+        const url = 'https://159.203.24.33:8883/siga/auth/usuario';
         let data = {
             'login': login,
             'senha': senha
@@ -33,6 +34,7 @@ const Login = ({navigation}) => {
         let _headers = { 
             headers: {
                 "Content-Type": "application/json",
+                "Accept": "application/json"
             }
         };
 
@@ -69,10 +71,12 @@ const Login = ({navigation}) => {
                 </View>
 
                 <Loading loading={loading} />
-                <ScrollView>
-                    <Text style={styles.messageSuccess}>{messageSuccess}</Text>
-                    <Text style={styles.messageError}>{messageError}</Text>
-                </ScrollView>
+                {messageSuccess != ""  &&
+                <Text style={styles.messageSuccess}>{messageSuccess}</Text>
+                }
+                {messageError != ""  &&
+                <TextAreaLabel style={styles.messageError} value={messageError} numLines={10}/>
+                }
             </View>
 
         </SafeAreaView>

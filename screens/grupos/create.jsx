@@ -4,12 +4,14 @@ import Header from '../../components/Header';
 import axios from 'axios';
 import Button from '../../components/Button';
 import TextInputLabel from '../../components/TextInputLabel';
+import TextAreaLabel from '../../components/TextAreaLabel';
 import Loading from '../../components/Loading';
 import Message from '../../components/Message';
 
 const CreateGrupo = ({ navigation }) => {
 
     const [nome, setNome] = useState('');
+    const [descricao, setDescricao] = useState('');
     const [alertNome, setAlertNome] = useState('');
     const [messageSuccess, setMessageSuccess] = useState('');
     const [messageError, setMessageError] = useState('');
@@ -34,6 +36,8 @@ const CreateGrupo = ({ navigation }) => {
         let data = {
             'nome': nome
         };
+
+        setTimeout(async () => {
 
         await axios.post(url, data)
             .then((response) => {
@@ -65,6 +69,7 @@ const CreateGrupo = ({ navigation }) => {
                 setLabelButton(labelBotao);
                 setLoading(false);
             });
+        }, 30000);
 
     }
 
@@ -78,6 +83,7 @@ const CreateGrupo = ({ navigation }) => {
             <View style={{ padding: 16 }} >
 
                 <TextInputLabel label="Nome" autoCapitalize="words" onChangeText={text => setNome(text)} alert={alertNome} value={nome} />
+                <TextAreaLabel label="Descrição" style={styles.messageError} onChangeText={text => setDescricao(text)} value={descricao} numLines={8}/>
 
                 <View style={styles.bottomPosition}>
                     <Button label={labelButton} onPress={onCreate} disabled={disabledButton} />
