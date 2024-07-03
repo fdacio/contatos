@@ -1,30 +1,59 @@
-import React from 'react';
-import { StyleSheet, SafeAreaView, TouchableOpacity, View, Image } from 'react-native';
+import React, { useEffect } from 'react';
+import { Alert, BackHandler } from 'react-native';
+import { StyleSheet, SafeAreaView, TouchableOpacity, View, Image, Text } from 'react-native';
 import Header from '../components/Header';
 import Logo from '../assets/home.png'
+import { useNavigation } from '@react-navigation/native';
 
 
-const Home = ({ navigation }) => {
+const Home = () => {
 
-    const onLogin = () => {
-        navigation.navigate("Login");
-    }
+    const navigation = useNavigation();
+
+    useEffect(() => {
+
+        const backAction = () => {
+
+
+            Alert.alert("Contatos", "Deseja sair da aplicação?", [
+                {
+                    text: "Não",
+                    onPress: () => null,
+                    style: "cancel"
+                },
+                { text: "Sim", onPress: () => BackHandler.exitApp() }
+            ]);
+
+            return true;
+
+        };
+
+        const backHandler = BackHandler.addEventListener(
+            "hardwareBackPress",
+            backAction
+        );
+
+        return () => backHandler.remove();
+
+    }, []);
+
 
     return (
         <SafeAreaView style={styles.container}>
-            <Header title="Meus Contatos" navigation={navigation} buttonBack={false} buttonMenu={true} linksAction={[
-                {
-                    "action" : onLogin,
-                    "text" : "Login"
-                },
-            ]}/>
+
+            <Header title="Meus Contatos" buttonBack={false} buttonMenu={true} componentsRight={[
+                <TouchableOpacity onPress={() => navigation.navigate("Login")}>
+                    <Text style={{ color: "white" }}>Login</Text>
+                </TouchableOpacity>
+            ]} />
+
             <View style={styles.contentImageHome}>
                 <TouchableOpacity style={styles.touchableImageHome}
-                    onPress={() => navigation.navigate('MenuContatos')} >
-
+                    onPress={() => navigation.navigate('Contatos')} >
                     <Image source={Logo} style={styles.imageHome}></Image>
                 </TouchableOpacity>
             </View>
+
         </SafeAreaView>
     )
 }

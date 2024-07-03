@@ -1,15 +1,19 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { FlatList, StyleSheet, SafeAreaView, View, Text, Alert } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import { useNavigation } from '@react-navigation/native';
 import axios from 'axios';
 import ButtonListItem from '../../components/ButtonListItem';
 import Header from '../../components/Header';
 import Loading from '../../components/Loading';
 import Pagination from '../../components/Pagination';
 import FloatButton from '../../components/FloatButton';
-import FormSearchContatos from './search';
+import FormSearchContatos from './search'; 
+import Icon from 'react-native-vector-icons/FontAwesome';
 
+const ListContatos = () => {
 
-const ListContatos = ({ navigation }) => {
+    const navigation = useNavigation();
 
     const flatListRef = useRef()
     const [contatos, setContatos] = useState([]);
@@ -28,13 +32,10 @@ const ListContatos = ({ navigation }) => {
     const sizePage = 20;
     const urlDefault = `https://contatos.daciosoftware.com.br/api/contatos/pageable?page=1&size=${sizePage}`;
 
-
     const onLoadList = async (url) => {
 
         if (isFreshing) return;
         setIsFreshing(true);
-
-        console.log("URL Get: " + url);
 
         await axios.get(url)
             .then((response) => {
@@ -60,9 +61,6 @@ const ListContatos = ({ navigation }) => {
             });
     }
 
-    const onCreateContato = () => {
-        navigation.navigate('CreateContato');
-    }
 
     const onFormSearch = () => {
         if (!visibleFormSearch) {
@@ -88,7 +86,6 @@ const ListContatos = ({ navigation }) => {
 
     useEffect(() => {
         const unsubscribe = navigation.addListener('focus', async () => {
-            console.log("useEffect");
             onLoadList(urlDefault);
         });
         return unsubscribe;
@@ -98,19 +95,27 @@ const ListContatos = ({ navigation }) => {
 
         <SafeAreaView style={styles.container}>
 
-            <Header title="Contatos" navigation={navigation} buttonBack={true} buttonsAction={[
-                {
-                    "action" : onCreateContato,
-                    "iconName" : "plus"
-                },
-                {
-                    "action" : onFormSearch,
-                    "iconName" : "search"
+            <Header title="Contatos" buttonBack={true} componentsRight={[
 
-                },
-            ]
-            }>
-            </Header>
+                <TouchableOpacity
+                    onPress={() => navigation.navigate("CreateContato")}>
+                    <Icon
+                        name="plus"
+                        size={20}
+                        color="white" />
+                </TouchableOpacity>
+                ,
+
+                <TouchableOpacity
+                    onPress={onFormSearch}>
+                    <Icon
+                        name="search"
+                        size={20}
+                        color="white" />
+                </TouchableOpacity>
+            ]}
+            />
+
 
             {formSearch}
 
@@ -126,16 +131,16 @@ const ListContatos = ({ navigation }) => {
                             <View style={styles.groupButton} >
                                 <ButtonListItem navigation={navigation} buttonsAction={[
                                     {
-                                        "route" : "EditContato",
-                                        "id" : item.id,
-                                        "iconName" : "edit"
+                                        "route": "EditContato",
+                                        "id": item.id,
+                                        "iconName": "edit"
                                     },
                                     {
-                                        "route" : "DeleteContato",
-                                        "id" : item.id,
-                                        "iconName" : "trash"
+                                        "route": "DeleteContato",
+                                        "id": item.id,
+                                        "iconName": "trash"
                                     },
-                                ]}/>
+                                ]} />
                             </View>
                         </View>
                         <View>
@@ -147,37 +152,37 @@ const ListContatos = ({ navigation }) => {
                             </View>
                         </View>
                     </View>
-                    
+
                 }
-                
-                ItemSeparatorComponent = {<View style={styles.itemSeparator}></View> }
+
+                ItemSeparatorComponent={<View style={styles.itemSeparator}></View>}
                 ListFooterComponent={<View><Text></Text></View>}
 
             />
-            
-            <FloatButton iconName="refresh" onPress={() => onLoadList(urlDefault)} style={{bottom: 64}}/>
+
+            <FloatButton iconName="refresh" onPress={() => onLoadList(urlDefault)} style={{ bottom: 64 }} />
 
             <Pagination totalRegistros={totalRegistros} totalPaginas={totalPaginas} paginaAtual={paginaAtual} actions={[
-                        {
-                            'key': 'fp',
-                            'action': onFirstPage
-                        },
-                        {
-                            'key': 'pp',
-                            'action': onPreviorPage
-                        },
-                        {
-                            'key': 'np',
-                            'action': onNextPage
-                        },
-                        {
-                            'key': 'lp',
-                            'action': onLastPage
-                        },
-                ]}/>
+                {
+                    'key': 'fp',
+                    'action': onFirstPage
+                },
+                {
+                    'key': 'pp',
+                    'action': onPreviorPage
+                },
+                {
+                    'key': 'np',
+                    'action': onNextPage
+                },
+                {
+                    'key': 'lp',
+                    'action': onLastPage
+                },
+            ]} />
 
-             <Loading loading={isFreshing} />
-        
+            <Loading loading={isFreshing} />
+
         </SafeAreaView>
 
     )

@@ -2,25 +2,18 @@ import React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import styles from './styles';
+import { useNavigation } from '@react-navigation/native';
 
 const Header = (props) => {
 
-    const onGoBack = () => {
-        const navigation = props.navigation;
-        navigation.goBack();
-    }
-
-    const onOpenDrawer = () => {
-        const navigation = props.navigation;
-        navigation.openDrawer();
-    }
+    const navigation = useNavigation();
 
     return (
         <View style={styles.content}>
-            <View style={styles.buttonLeft}>
+            <View style={styles.contentComponentsLeft}>
                 {(props.buttonBack != undefined && props.buttonBack) &&
-                    <TouchableOpacity style={styles.button}
-                        onPress={() => onGoBack()}>
+                    <TouchableOpacity style={styles.componentsActions}
+                        onPress={() => navigation.goBack()}>
                         <Icon
                             name="arrow-left"
                             size={20}
@@ -28,8 +21,8 @@ const Header = (props) => {
                     </TouchableOpacity>
                 }
                 {(props.buttonMenu != undefined && props.buttonMenu) &&
-                    <TouchableOpacity style={styles.button}
-                        onPress={() => onOpenDrawer()}>
+                    <TouchableOpacity style={styles.componentsActions}
+                        onPress={() => navigation.openDrawer()}>
                         <Icon
                             name="bars"
                             size={20}
@@ -40,21 +33,22 @@ const Header = (props) => {
 
             <Text style={styles.title}>{props.title}</Text>
 
-            <View style={styles.buttonRight}>
-                {(props.buttonsAction != undefined) && props.buttonsAction.map((button, index) =>
-                    <TouchableOpacity style={styles.button} key={index}
-                        onPress={() => button.action()}>
-                        <Icon
-                            name={button.iconName}
-                            size={20}
-                            color="white" />
-                    </TouchableOpacity>
-                )}
-                {(props.linksAction != undefined) && props.linksAction.map((link, index) =>
-                    <Text style={styles.link} onPress={()=>link.action()} key={index}>{link.text}</Text>
-                )}
-            </View>
+            <View style={styles.contentComponentsRight}>
 
+                {
+                    (props.componentsRight != undefined) && props.componentsRight.map((component, index) => {
+
+                        return (
+                            <View style={styles.componentsActions} key={index} >
+                                {component}
+                            </View>
+                        )
+                    }
+
+                    )
+                }
+
+            </View>
 
         </View>
     );

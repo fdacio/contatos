@@ -3,10 +3,11 @@ import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList, DrawerI
 import { StyleSheet, Text, ImageBackground, BackHandler } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import Home from './Home';
-import MenuContatos from './contatos/menu';
-import MenuGrupos from './grupos/menu';
 import Banner from '../assets/users.png';
+
+import Home from './Home';
+import Contatos from './contatos';
+import Grupos from './grupos';
 
 const Drawer = createDrawerNavigator();
 
@@ -59,8 +60,8 @@ const DrawerMenu = () => {
             drawerContent={(props) => <CustomDrawer {...props} />}>
 
             <Drawer.Screen name="Home" component={Home} options={{ title: 'Home', headerShown: false, drawerIcon: (() => <Icon name="home" size={20} color="#000" width={20} />) }} />
-            <Drawer.Screen name="MenuContatos" component={MenuContatos} options={{ title: 'Contatos', headerShown: false, drawerIcon: (() => <Icon name="users" size={20} color="#000" width={20} />) }} />
-            <Drawer.Screen name="MenuGrupos" component={MenuGrupos} options={{ title: 'Grupos', headerShown: false, drawerIcon: (() => <Icon name="users" size={20} color="#000" width={20} />) }} />
+            <Drawer.Screen name="Contatos" component={Contatos} options={{ title: 'Contatos', headerShown: false, drawerIcon: (() => <Icon name="users" size={20} color="#000" width={20} />) }} />
+            <Drawer.Screen name="Grupos" component={Grupos} options={{ title: 'Grupos', headerShown: false, drawerIcon: (() => <Icon name="users" size={20} color="#000" width={20} />) }} />
 
         </Drawer.Navigator>
     );

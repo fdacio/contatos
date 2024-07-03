@@ -26,7 +26,7 @@ const Login = ({navigation}) => {
         setLabelButton("Aguarde...");
         setLoading(true);
 
-        const url = 'https://159.203.24.33:8883/siga/auth/usuario';
+        const url = 'http://159.203.24.33:8083/siga/auth/usuario';
         let data = {
             'login': login,
             'senha': senha

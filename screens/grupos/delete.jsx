@@ -26,7 +26,6 @@ const DeleteGrupo = ({ navigation, route }) => {
 
     const onLoadGrupo= async (id) => {
         if (id === undefined) return;
-        console.log("Carregando Delete ...");
         setLoading(true);
 
         const url = 'https://contatos.daciosoftware.com.br/api/grupos/' + id;
@@ -67,7 +66,6 @@ const DeleteGrupo = ({ navigation, route }) => {
                 }
             })
             .catch((error) => {
-                console.log(error.response.data);
                 if (error.toJSON().message === 'Network Error') {
                     Alert.alert("Erro", "Ver conexão com a internet");
                     dispatch({ type: RELOAD });
@@ -80,7 +78,6 @@ const DeleteGrupo = ({ navigation, route }) => {
                 setLabelButton(labelBotao);
                 setLoading(false);
             });
-
     }
 
     return (
@@ -88,9 +85,9 @@ const DeleteGrupo = ({ navigation, route }) => {
             
             <Header title="Deletar Grupo" navigation={navigation} buttonBack={true} />
 
-            <Message message={messageSuccess} ></Message>
-            
             <View style={{ padding: 16 }} >
+
+                <Message message={messageSuccess} ></Message>
 
                 <View style={styles.contentDados}>
                     <Text style={styles.itemName}>{grupo.nome}</Text>
@@ -117,9 +114,12 @@ const styles = StyleSheet.create({
     },
 
     contentDados: {
-        padding: 4,
+        width: '100%',
+        height: 48,
+        padding: 8,
+        borderColor: '#000',
         borderWidth: 1,
-        borderRadius: 8,
+        borderRadius: 4
     },
 
     itemName: {

@@ -30,7 +30,6 @@ const EditGrupo = ({ navigation, route }) => {
 
     const onLoadGrupo = async (id) => {
         if (id === undefined) return;
-        console.log("Carregando Edit ...");
         setLoading(true);
 
         const url = 'https://contatos.daciosoftware.com.br/api/grupos/' + id;
@@ -102,9 +101,9 @@ const EditGrupo = ({ navigation, route }) => {
 
             <Header title="Cadastrar Grupo" navigation={navigation} buttonBack={true} />
 
-            <Message message={messageSuccess} ></Message>
-
             <View style={{ padding: 16 }} >
+
+                <Message message={messageSuccess} ></Message>
 
                 <TextInputLabel label="Nome" autoCapitalize="words" onChangeText={text => setNome(text)} alert={alertNome} value={nome} />
 

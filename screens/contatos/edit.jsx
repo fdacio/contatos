@@ -42,7 +42,6 @@ const EditContato = ({ navigation, route }) => {
     };
 
     useEffect(() => {
-        console.log("useEffect Edit ...");
         onLoadGrupos();
         onLoadContato(route.params.id);
     }, []);
@@ -153,9 +152,9 @@ const EditContato = ({ navigation, route }) => {
 
             <Header title="Editar Contato" navigation={navigation} buttonBack={true} />
 
-            <Message message={messageSuccess} />
-
             <ScrollView style={{ padding: 16 }}>
+
+                <Message message={messageSuccess} />
 
                 <TextInputLabel label="Nome" autoCapitalize="words" onChangeText={text => setNome(text)} alert={alertNome} value={nome} />
 

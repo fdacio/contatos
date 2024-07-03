@@ -121,9 +121,9 @@ const CreateContato = ({ navigation }) => {
 
             <Header title="Cadastrar Contato" navigation={navigation} buttonBack={true} />
 
-            <Message message={messageSuccess} ></Message>
-
             <ScrollView style={{ padding: 16 }} >
+                
+                <Message message={messageSuccess} ></Message>
 
                 <TextInputLabel label="Nome" autoCapitalize="words" onChangeText={text => setNome(text)} alert={alertNome} value={nome} />
 

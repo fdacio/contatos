@@ -1,18 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, SafeAreaView, FlatList, View, Text, Alert, TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import ButtonListItem from '../../components/ButtonListItem';
 import axios from 'axios';
 import Header from '../../components/Header';
 import Loading from '../../components/Loading';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 
-const ListGrupos = ({ navigation }) => {
+const ListGrupos = () => {
+
+    const navigation = useNavigation();
 
     const [grupos, setGrupos] = useState([]);
     const [isFreshing, setIsFreshing] = useState(false);
 
     const onLoadList = async () => {
-        console.log("Carregando Lista...");
         setIsFreshing(true);
         const url = 'https://contatos.daciosoftware.com.br/api/grupos';
         await axios.get(url)
@@ -36,20 +39,24 @@ const ListGrupos = ({ navigation }) => {
     useEffect(() => {
         const unsubscribe = navigation.addListener('focus', async () => {
             onLoadList();
-            console.log("useEffect");
         });
         return unsubscribe;
     }, [navigation]);
 
     return (
         <SafeAreaView style={styles.container}>
-            <Header title="Grupos" navigation={navigation} buttonBack={true}  buttonsAction={[
-                {
-                    "action" : onCreateGrupo,
-                    "iconName" : "plus" 
-                }
+            <Header title="Grupos" buttonBack={true}  
+            componentsRight={[
+
+                <TouchableOpacity
+                    onPress={() => navigation.navigate("CreateGrupo")}>
+                    <Icon
+                        name="plus"
+                        size={20}
+                        color="white" />
+                </TouchableOpacity>
             ]}
-            ></Header>
+            />
 
             <FlatList style={{ padding: 16 }}
                 data={grupos}

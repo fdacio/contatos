@@ -9,7 +9,7 @@ const Styles = StyleSheet.create({
         paddingHorizontal: 8
     },
 
-    buttonLeft: {
+    contentComponentsLeft: {
         flex: 1,
         alignItems: 'flex-start',
         alignSelf: 'center',
@@ -25,24 +25,22 @@ const Styles = StyleSheet.create({
         flexWrap: 'nowrap',
     },
 
-    link: {
-        fontSize: 14,
-        fontWeight: 'bold',
-        color: 'white',
-    },
-
-
-    buttonRight: {
+    contentComponentsRight: {
         flex: 1,
         flexDirection: 'row',
         justifyContent: 'flex-end',
-        alignSelf: 'center',
+        alignSelf: 'center'
     },
 
-    button: {
+    componentsActions: {
         padding: 8,
         borderWidth: 0,
-        borderColor: '#fff'
+        borderColor: '#fff',   
+    },
+
+    boder: {
+        borderWidth: 1,
+        borderColor: 'white',
     }
 });
 

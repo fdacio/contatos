@@ -26,7 +26,6 @@ const DeleteContato= ({ navigation, route }) => {
 
     const onLoadContatos = async (id) => {
         if (id === undefined) return;
-        console.log("Carregando Delete ...");
         setLoading(true);
 
         const url = 'https://contatos.daciosoftware.com.br/api/contatos/' + id;
@@ -88,9 +87,10 @@ const DeleteContato= ({ navigation, route }) => {
 
             <Header title="Deletar Contato" navigation={navigation} buttonBack={true} />
 
-            <Message message={messageSuccess} ></Message>
-
             <View style={{ padding: 16 }} >
+                
+                <Message message={messageSuccess} ></Message>
+                
                 {(contato != undefined) &&
                 <View style={styles.contentDados}>
                     <Text style={styles.textDadoName}>{contato.nome}</Text>

@@ -37,8 +37,6 @@ const CreateGrupo = ({ navigation }) => {
             'nome': nome
         };
 
-        setTimeout(async () => {
-
         await axios.post(url, data)
             .then((response) => {
                 if (response.status == 201) {
@@ -51,7 +49,6 @@ const CreateGrupo = ({ navigation }) => {
                 }
             })
             .catch((error) => {
-                console.log(error);
                 if (error.toJSON().message === 'Network Error') {
                     Alert.alert("Erro", "Ver conexão com a internet");
                     dispatch({ type: RELOAD });
@@ -69,7 +66,7 @@ const CreateGrupo = ({ navigation }) => {
                 setLabelButton(labelBotao);
                 setLoading(false);
             });
-        }, 30000);
+        
 
     }
 
@@ -78,9 +75,9 @@ const CreateGrupo = ({ navigation }) => {
 
             <Header title="Cadastrar Grupo" navigation={navigation} buttonBack={true} />
 
-            <Message message={messageSuccess} ></Message>
-
             <View style={{ padding: 16 }} >
+
+                <Message message={messageSuccess} ></Message>
 
                 <TextInputLabel label="Nome" autoCapitalize="words" onChangeText={text => setNome(text)} alert={alertNome} value={nome} />
                 <TextAreaLabel label="Descrição" style={styles.messageError} onChangeText={text => setDescricao(text)} value={descricao} numLines={8}/>

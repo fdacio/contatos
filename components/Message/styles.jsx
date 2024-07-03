@@ -9,7 +9,7 @@ const Styles = StyleSheet.create({
         padding: 8,
         borderRadius: 4,
         borderColor: '#c3e6cb',
-        marginVertical: 4
+        marginBottom: 4
     },
 
     message: {
